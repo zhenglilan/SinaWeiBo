@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface ItemTool : NSObject
-
++ (UIBarButtonItem *)itemWithTarget:(id)target action:(SEL)action image:(NSString *)image highlightedImage:(NSString *)hightlightedImage;
 @end

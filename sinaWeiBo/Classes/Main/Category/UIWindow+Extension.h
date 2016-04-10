@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIWindow (Extension)
-
+//+ (void)switchRootViewController;
+/** 不用类方法，用对象方法更合理一些。*/
+- (void)switchRootViewController;
 @end

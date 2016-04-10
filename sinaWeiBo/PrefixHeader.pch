@@ -6,10 +6,31 @@
 //  Copyright © 2016年 zhenglilan. All rights reserved.
 //
 
+#import "UIView+Extension.h"
+#import "UIBarButtonItem+Extension.h"
+#import "UIWindow+Extension.h"
+
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
-
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+// 颜色
+#define kColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+
+// 随机色
+//#define kRandomColor [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1.0]
+#define kRandomColor kColor(arc4random()%(256), arc4random()%(256), arc4random()%(256))
+
+#ifdef DEBUG// 处于开发阶段。 可变参数宏：__VA_ARGS__
+#define ZLLog(...) NSLog(__VA_ARGS__)
+#else//  处于发布阶段
+#define ZLLog(...)
+#endif
+
+// account的沙盒路径定义成宏
+#define AccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.archive"]
+
+
 
 #endif /* PrefixHeader_pch */

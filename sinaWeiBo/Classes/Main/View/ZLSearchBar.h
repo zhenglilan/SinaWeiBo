@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ZLSearchBar : UITextField
-
++(instancetype)searchBar;
 @end
