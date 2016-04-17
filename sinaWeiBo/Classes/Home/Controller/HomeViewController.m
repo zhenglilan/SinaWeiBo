@@ -45,17 +45,89 @@
     // 获取用户信息（昵称）
     [self setupUserInfo];
     
-    // 获取用户所关注人的微博
-     [self setupUserStatus];
+    // 加载最新的微博数据
+     //[self loadNewStatus];
+    
+    // 集成刷新控件
+    [self setupRefresh];
 }
 
 /**
- *  获取用户所关注人的微博
+ *  集成刷新控件
+ */
+- (void)setupRefresh
+{
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshStateChange:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
+}
+/**
+ *  UIRefreshControl 进入刷新状态：加载最新数据
+ */
+- (void)refreshStateChange:(UIRefreshControl *)refreshControl
+{
+    // 1.请求管理者
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/html", @"text/plain", nil];
+    
+    // 2.请求参数
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    Account *account = [AccountTool account];
+    parameters[@"access_token"] = account.access_token;
+    
+    // 取出最前面的微博（最新的微博，ID最大的微博）
+    ZLStatus *firstStatus = [self.statuses firstObject];
+    if (firstStatus) {
+        // since_id	false	int64	若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
+        parameters[@"since_id"] = firstStatus.idstr;
+    }
+   
+    
+    
+    // 3.发送请求
+    [session GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
+        ZLLog(@"关注人微博请求成功－%@",responseObject);
+        
+        /** 这段代码简化成下面那一句代码。
+         // 取得 “微博字典” 数组
+         NSArray *dicArray = responseObject[@"statuses"];
+         // 将 “微博字典” 转为 “微博模型” 数组
+         for (NSDictionary *dictionary in dicArray) {
+         ZLStatus *status = [ZLStatus mj_objectWithKeyValues:dictionary];
+         [self.statuses addObject:status];
+         }
+         */
+        
+        // 将 “微博字典” 转为 “微博模型” 数组(MJExtension，利用下面这个方法，将微博字典数组 转为 微博模型数组)
+        NSMutableArray *newStatuses = [ZLStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+        
+        // 将最新的微博数据，添加到总数组的最前面
+        NSRange range = NSMakeRange(0, newStatuses.count);
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+        [self.statuses insertObjects:newStatuses atIndexes:indexSet];
+        
+        // 刷新表格
+        [self.tableView reloadData];
+        
+        // 结束刷新
+        [refreshControl endRefreshing];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        ZLLog(@"关注人微博请求失败－%@",error);
+        // 结束刷新
+        [refreshControl endRefreshing];
+    }];
+
+}
+
+
+/**
+ *  加载最新的微博数据
  *  https://api.weibo.com/2/statuses/friends_timeline.json
  *  请求参数：access_token	true	string	采用OAuth授权方式为必填参数，OAuth授权后获得
  *  count	false	int	单页返回的记录条数，最大不超过100，默认为20。
  */
-- (void)setupUserStatus
+- (void)loadNewStatus
 {
     // 1.请求管理者
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
