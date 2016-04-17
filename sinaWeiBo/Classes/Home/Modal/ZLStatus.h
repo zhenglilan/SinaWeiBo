@@ -24,6 +24,6 @@
  */
 @property (nonatomic, strong)ZLUser *user;
 
-+ (instancetype)statusWithDictionary:(NSDictionary *)dic;
+//+ (instancetype)statusWithDictionary:(NSDictionary *)dic;
 
 @end

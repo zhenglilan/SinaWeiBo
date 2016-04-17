@@ -9,6 +9,7 @@
 #import "ZLUser.h"
 
 @implementation ZLUser
+/*
 +(instancetype) userWithDictionary:(NSDictionary *)dic
 {
     ZLUser *user = [[ZLUser alloc] init];
@@ -17,4 +18,5 @@
     user.idstr = dic[@"idstr"];
     return user;
 }
+*/
 @end

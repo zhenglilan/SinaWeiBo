@@ -21,5 +21,5 @@
  */
 @property (nonatomic, copy)NSString *name;
 
-+ (instancetype)userWithDictionary:(NSDictionary *)dic;
+//+ (instancetype)userWithDictionary:(NSDictionary *)dic;
 @end

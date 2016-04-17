@@ -9,6 +9,7 @@
 #import "ZLStatus.h"
 
 @implementation ZLStatus
+/*
 + (instancetype)statusWithDictionary:(NSDictionary *)dic
 {
     ZLStatus *status = [[ZLStatus alloc] init];
@@ -17,4 +18,5 @@
     status.user = [ZLUser userWithDictionary:dic[@"user"]];
     return status;
 }
+ */
 @end

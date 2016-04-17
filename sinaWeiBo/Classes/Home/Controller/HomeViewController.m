@@ -14,6 +14,7 @@
 #import "ZLTitleButton.h"
 #import "UIImageView+WebCache.h"
 #import "ZLStatus.h"
+#import "MJExtension.h"
 
 
 @interface HomeViewController ()<ZLDropDownMenuDelegate>
@@ -69,13 +70,19 @@
     // 3.发送请求
     [session GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
         ZLLog(@"关注人微博请求成功－%@",responseObject);
+        
+        /** 这段代码简化成下面那一句代码。
         // 取得 “微博字典” 数组
         NSArray *dicArray = responseObject[@"statuses"];
         // 将 “微博字典” 转为 “微博模型” 数组
         for (NSDictionary *dictionary in dicArray) {
-            ZLStatus *status = [ZLStatus statusWithDictionary:dictionary];
+            ZLStatus *status = [ZLStatus mj_objectWithKeyValues:dictionary];
             [self.statuses addObject:status];
         }
+        */
+        
+        // 将 “微博字典” 转为 “微博模型” 数组(MJExtension，利用下面这个方法，将微博字典数组 转为 微博模型数组)
+        self.statuses = [ZLStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         
         // 刷新表格
         [self.tableView reloadData];
@@ -111,8 +118,8 @@
         //ZLLog(@"请求成功%@",responseObject);
         // 标题按钮
         UIButton *titleBtn = (UIButton *)self.navigationItem.titleView;
-        // 设置名字
-        ZLUser *user = [ZLUser userWithDictionary:responseObject];
+        // 设置名字(MJExtension: 利用下面这个方法，将字典转化成模型)
+        ZLUser *user = [ZLUser mj_objectWithKeyValues:responseObject];
 //        NSString *name = responseObject[@"name"];
         [titleBtn setTitle:user.name forState:UIControlStateNormal];
         // 存储用户名称
