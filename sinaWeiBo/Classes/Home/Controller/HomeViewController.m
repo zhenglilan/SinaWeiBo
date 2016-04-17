@@ -12,12 +12,28 @@
 #import "AFNetworking.h"
 #import "AccountTool.h"
 #import "ZLTitleButton.h"
+#import "UIImageView+WebCache.h"
+#import "ZLStatus.h"
+
 
 @interface HomeViewController ()<ZLDropDownMenuDelegate>
-
+/** 微博数组 （里面放的都是ZLStatus模型，一个ZLStatus对象代表一条微博*/
+@property (nonatomic, strong)NSMutableArray *statuses;
 @end
 
 @implementation HomeViewController
+/**
+ *  懒加载
+ *
+ *  @return statuses
+ */
+- (NSMutableArray *)statuses
+{
+    if (!_statuses) {
+        _statuses = [NSMutableArray array];
+    }
+    return _statuses;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,7 +43,48 @@
     
     // 获取用户信息（昵称）
     [self setupUserInfo];
+    
+    // 获取用户所关注人的微博
+     [self setupUserStatus];
 }
+
+/**
+ *  获取用户所关注人的微博
+ *  https://api.weibo.com/2/statuses/friends_timeline.json
+ *  请求参数：access_token	true	string	采用OAuth授权方式为必填参数，OAuth授权后获得
+ *  count	false	int	单页返回的记录条数，最大不超过100，默认为20。
+ */
+- (void)setupUserStatus
+{
+    // 1.请求管理者
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/html", @"text/plain", nil];
+    
+    // 2.请求参数
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    Account *account = [AccountTool account];
+    parameters[@"access_token"] = account.access_token;
+//    parameters[@"count"] = @10;
+    
+    // 3.发送请求
+    [session GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
+        ZLLog(@"关注人微博请求成功－%@",responseObject);
+        // 取得 “微博字典” 数组
+        NSArray *dicArray = responseObject[@"statuses"];
+        // 将 “微博字典” 转为 “微博模型” 数组
+        for (NSDictionary *dictionary in dicArray) {
+            ZLStatus *status = [ZLStatus statusWithDictionary:dictionary];
+            [self.statuses addObject:status];
+        }
+        
+        // 刷新表格
+        [self.tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        ZLLog(@"关注人微博请求失败－%@",error);
+    }];
+}
+
 
 /**
  *  获取用户信息（昵称）
@@ -51,12 +108,15 @@
     
     // 3.发送请求
     [session GET:@"https://api.weibo.com/2/users/show.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        ZLLog(@"请求成功%@",responseObject);
+        //ZLLog(@"请求成功%@",responseObject);
+        // 标题按钮
         UIButton *titleBtn = (UIButton *)self.navigationItem.titleView;
-        NSString *name = responseObject[@"name"];
-        [titleBtn setTitle:name forState:UIControlStateNormal];
+        // 设置名字
+        ZLUser *user = [ZLUser userWithDictionary:responseObject];
+//        NSString *name = responseObject[@"name"];
+        [titleBtn setTitle:user.name forState:UIControlStateNormal];
         // 存储用户名称
-        account.name = name;
+        account.name = user.name;
         [AccountTool saveAccount:account];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -71,17 +131,16 @@
 {
     // 导航栏左边
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(friendSearch) image:@"navigationbar_friendsearch" highlightedImage:@"navigationbar_friendsearch_highlighted"];
-    
     // 导航栏右边
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(pop) image:@"navigationbar_pop" highlightedImage:@"navigationbar_pop_highlighted"];
     
-    // 导航栏标题
+    /* 中间的标题按钮 */
     ZLTitleButton *titleButton = [[ZLTitleButton alloc] init];
-    titleButton.width = 230;
-    titleButton.height = 30;
+    // 设置图片和文字
         // 导航栏标题显示用户上一次使用的名称
     NSString *name = [AccountTool account].name;
     [titleButton setTitle:name?name:@"首页" forState:UIControlStateNormal];
+    // 监听标题点击
     [titleButton addTarget:self action: @selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.titleView = titleButton;
@@ -154,70 +213,46 @@
 
 
 }
+
+
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return [self.statuses count];
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellID = @"status";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+    }
     
-    // Configure the cell...
+    // 取出这行对应的微博字典
+//    NSDictionary *statusDic = [self.statuses objectAtIndex:indexPath.row];
+    ZLStatus *status = self.statuses[indexPath.row];
+    
+    // 设置微博的文字
+//    cell.detailTextLabel.text = statusDic[@"text"];
+    cell.detailTextLabel.text = status.text;
+    
+    // 取出微博的用户作者的用户信息（user）
+        // 用户名称
+//    NSDictionary *userDic = statusDic[@"user"];
+//    cell.textLabel.text = userDic[@"name"];
+    ZLUser *user = status.user;
+    cell.textLabel.text = user.name;
+    
+        // 用户头像
+//    NSString *imageURL = userDic[@"profile_image_url"];
+//    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"avatar_default_small"]];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:user.profile_image_url] placeholderImage:[UIImage imageNamed:@"avatar_default_small"]];
+    
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
