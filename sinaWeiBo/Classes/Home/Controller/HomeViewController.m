@@ -15,6 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "ZLStatus.h"
 #import "MJExtension.h"
+#import "ZLLoadMoreFooter.h"
 
 
 @interface HomeViewController ()<ZLDropDownMenuDelegate>
@@ -48,19 +49,47 @@
     // 加载最新的微博数据
      //[self loadNewStatus];
     
-    // 集成刷新控件
-    [self setupRefresh];
+    // 集成下拉刷新控件
+    [self setupDownRefresh];
+    
+    // 集成上拉刷新控件
+    [self setupUpRefresh];
+    
+    // 获取未读数
+    //NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(setupUnreadCount) userInfo:nil repeats:YES];
+    // 主线程也会抽时间处理一下timer （不管主线程是否正在其他事件）
+    //[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
 /**
- *  集成刷新控件
+ *  集成上拉刷新控件
  */
-- (void)setupRefresh
+- (void)setupUpRefresh
 {
+    ZLLoadMoreFooter *footer = [ZLLoadMoreFooter footer];
+    self.tableView.tableFooterView = footer;
+    footer.hidden = YES;
+    
+}
+
+/**
+ *  集成下拉刷新控件
+ */
+- (void)setupDownRefresh
+{
+    // 1.添加刷新控件
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+        // 只有用户手动下拉刷新，才会触发UIControlEventValueChanged事件
     [refreshControl addTarget:self action:@selector(refreshStateChange:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
+    
+    // 2.马上进入刷新状态(仅仅是显示刷新状态，并不会触发UIControlEventValueChanged事件)
+    [refreshControl beginRefreshing];
+    
+    // 3.马上加载数据
+    [self refreshStateChange:refreshControl];
 }
+
 /**
  *  UIRefreshControl 进入刷新状态：加载最新数据
  */
@@ -81,12 +110,10 @@
         // since_id	false	int64	若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
         parameters[@"since_id"] = firstStatus.idstr;
     }
-   
-    
-    
+
     // 3.发送请求
     [session GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
-        ZLLog(@"关注人微博请求成功－%@",responseObject);
+       // ZLLog(@"关注人微博请求成功－%@",responseObject);
         
         /** 这段代码简化成下面那一句代码。
          // 取得 “微博字典” 数组
@@ -112,6 +139,9 @@
         // 结束刷新
         [refreshControl endRefreshing];
         
+        // 显示最新微博的数量
+        [self showNewStatusCount:newStatuses.count];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         ZLLog(@"关注人微博请求失败－%@",error);
         // 结束刷新
@@ -119,6 +149,138 @@
     }];
 
 }
+
+/**
+ *  加载更多的微博数据 （上拉加载更多）
+ */
+- (void)loadMoreStatus
+{
+    // 1.请求管理者
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/html", @"text/plain", nil];
+    
+    // 2.拼接请求参数
+    NSMutableDictionary *parames = [NSMutableDictionary dictionary];
+    Account *account = [AccountTool account];
+    parames[@"access_token"] = account.access_token;
+    // 取出最后面的微博（最新的微博，ID最大的微博）
+    ZLStatus *lastStatus = [self.statuses lastObject];
+    if (lastStatus) {
+        // 若指定次参数，则返回ID小于或等于max_id的微博，默认为0
+        // id这种数据一般是比较大的，一般转成整数的话，最好是long long类型
+        long long maxID = lastStatus.idstr.longLongValue - 1;
+        parames[@"max_id"] = @(maxID);
+    }
+    
+    
+    // 3.发送请求
+    [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parames progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 将 “微博字典”数组 转为 “微博模型”数组
+        NSArray *newStatuses = [ZLStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+        
+        // 将更多的微博数据，添加到总数组到最后面
+        [self.statuses addObjectsFromArray:newStatuses];
+        
+        // 刷新表格
+        [self.tableView reloadData];
+        
+        // 结束刷新（隐藏footer）
+        self.tableView.tableFooterView.hidden = YES;
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        self.tableView.tableFooterView.hidden = YES;
+    }];
+    
+}
+
+/**
+ *  获取未读数
+ */
+- (void)setupUnreadCount
+{
+    ZLLog(@"setupUnreadCount");
+    // 1.请求管理者
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/html",@"text/plain", nil];
+    
+    // 2.拼接参数
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    Account *account = [AccountTool account];
+    parameters[@"access_token"] = account.access_token;
+    parameters[@"uid"] = account.uid;
+    
+    // 3.发送请求
+    [manager GET:@"https://rm.api.weibo.com/2/remind/unread_count.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //ZLLog(@"未读数%@", responseObject);
+        // 设置提醒数字（微博未读数）
+        NSString *status = [responseObject[@"status"] description];
+        if ([status isEqualToString:@"0"]) {// 如果是0，得清空数字
+            self.tabBarItem.badgeValue = nil;
+            // 图标上的未读数
+            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        }else { //非零情况
+            self.tabBarItem.badgeValue = status;
+            [UIApplication sharedApplication].applicationIconBadgeNumber = status.intValue;
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+
+/**
+ *  显示最新微博的数量
+ *
+ *  @param count 最新微博的数量
+ */
+- (void)showNewStatusCount:(NSInteger)count
+{
+    // 刷新成功（清空图标数字）
+    self.tabBarItem.badgeValue = nil;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    // 1.创建Label
+    UILabel *label = [[UILabel alloc] init];
+    label.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"timeline_new_status_background"]];
+    label.width = [UIScreen mainScreen].bounds.size.width;
+    label.height = 35;
+    label.y = 64 - label.height;
+    
+    // 2.设置其他属性
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont systemFontOfSize:15];
+    label.textAlignment = NSTextAlignmentCenter;
+    if (count == 0) {
+        label.text = @"没有新的微博";
+    }else {
+        label.text = [NSString stringWithFormat:@"%ld条微博更新", count];
+    }
+    
+    // 3.添加 (UIWindow-不行；UITableView-不行，会跟着滚；UINavigation-可以)
+    //  label添加到导航控制器的view当中，并且是盖在导航栏下面
+    [self.navigationController.view insertSubview:label belowSubview:self.navigationController.navigationBar];
+    
+    // 4.动画 ： 如果某个动画执行完毕后，又要回到动画执行前状态，建议使用transform来做动画
+        // 先利用1S的时间，让label往下移动自己高度的距离
+    NSTimeInterval duration = 1.0; // 动画持续时间
+    [UIView animateWithDuration:duration animations:^{
+//        label.y += label.height;
+        label.transform = CGAffineTransformMakeTranslation(0, label.height);
+        
+    } completion:^(BOOL finished) {
+        // 延迟1S，再先利用1S的时间，让label往上移动自己高度的距离（回到一开始的状态）
+        NSTimeInterval delay = 1.0; // 延迟1S
+        [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveLinear animations:^{
+//            label.y -= label.height;
+            label.transform = CGAffineTransformIdentity; // 回到原来的高度
+            
+        } completion:^(BOOL finished) {
+            [label  removeFromSuperview];
+        }];
+    }];
+}
+
 
 
 /**
@@ -141,7 +303,7 @@
     
     // 3.发送请求
     [session GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
-        ZLLog(@"关注人微博请求成功－%@",responseObject);
+//        ZLLog(@"关注人微博请求成功－%@",responseObject);
         
         /** 这段代码简化成下面那一句代码。
         // 取得 “微博字典” 数组
@@ -163,7 +325,6 @@
         ZLLog(@"关注人微博请求失败－%@",error);
     }];
 }
-
 
 /**
  *  获取用户信息（昵称）
@@ -327,11 +488,27 @@
 //    NSString *imageURL = userDic[@"profile_image_url"];
 //    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"avatar_default_small"]];
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:user.profile_image_url] placeholderImage:[UIImage imageNamed:@"avatar_default_small"]];
-    
-    
+
     return cell;
 }
 
+/**
+ *  scrollView的代理方法
+ *
+ */
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // 如果tableview没有数据就直接返回
+    if (self.statuses.count == 0 || self.tableView.tableFooterView.isHidden == NO) return;
+    
+    // 当最后一个cell完全显示在眼前，contentOffset的y值
+    CGFloat offsetY = scrollView.contentOffset.y;
+    CGFloat judgeOffsetY = scrollView.contentSize.height + scrollView.contentInset.bottom - scrollView.height - self.tableView.tableFooterView.height;
+    if (offsetY >= judgeOffsetY) {
+        self.tableView.tableFooterView.hidden = NO;
+        [self loadMoreStatus];
+    }
+}
 
 
 @end

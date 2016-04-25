@@ -8,6 +8,8 @@
 
 #import "ZLTitleButton.h"
 
+#define ZLMargin 10
+
 @implementation ZLTitleButton
 - (instancetype) initWithFrame:(CGRect)frame
 {
@@ -15,6 +17,7 @@
     if (self) {
         // 图片居中
 //        self.imageView.contentMode = UIViewContentModeCenter;
+        self.backgroundColor = [UIColor redColor];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
         [self setImage:[UIImage imageNamed:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
@@ -30,6 +33,18 @@
     return self;
 }
 
+// 目的：想在系统计算和设置完按钮的尺寸后，再修改下尺寸
+/**
+ *  重写setFrame:方法的目的：拦截设置按钮尺寸的过程
+ *
+ */
+- (void)setFrame:(CGRect)frame
+{
+    frame.size.width += ZLMargin;
+    [super setFrame:frame];
+    
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -40,7 +55,7 @@
     // 1. 计算titleLabel的frame
     self.titleLabel.x = self.imageView.x;
     // 2. 计算imageView的frame
-    self.imageView.x = CGRectGetMaxX(self.titleLabel.frame);
+    self.imageView.x = CGRectGetMaxX(self.titleLabel.frame) + 10;
 }
 
 - (void)setTitle:(NSString *)title forState:(UIControlState)state

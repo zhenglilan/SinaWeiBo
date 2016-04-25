@@ -35,6 +35,8 @@
 		E26028081CC1065800532662 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E26028071CC1065800532662 /* Foundation+Log.m */; };
 		E260280B1CC24BE000532662 /* ZLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E260280A1CC24BE000532662 /* ZLUser.m */; };
 		E260280E1CC24BEA00532662 /* ZLStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E260280D1CC24BEA00532662 /* ZLStatus.m */; };
+		E26028111CC4744F00532662 /* ZLLoadMoreFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E26028101CC4744F00532662 /* ZLLoadMoreFooter.m */; };
+		E26028131CC4746C00532662 /* ZLLoadMoreFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = E26028121CC4746C00532662 /* ZLLoadMoreFooter.xib */; };
 		E294DF8D1CA015B300018477 /* ZLNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E294DF8C1CA015B300018477 /* ZLNewFeatureViewController.m */; };
 		E29FD78B1CB53CC700F40633 /* ZLTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E29FD78A1CB53CC700F40633 /* ZLTitleButton.m */; };
 		E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAE4171C999E260016CDE1 /* ZLTabBar.m */; };
@@ -118,6 +120,9 @@
 		E260280A1CC24BE000532662 /* ZLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLUser.m; sourceTree = "<group>"; };
 		E260280C1CC24BEA00532662 /* ZLStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatus.h; sourceTree = "<group>"; };
 		E260280D1CC24BEA00532662 /* ZLStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatus.m; sourceTree = "<group>"; };
+		E260280F1CC4744F00532662 /* ZLLoadMoreFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLLoadMoreFooter.h; sourceTree = "<group>"; };
+		E26028101CC4744F00532662 /* ZLLoadMoreFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLLoadMoreFooter.m; sourceTree = "<group>"; };
+		E26028121CC4746C00532662 /* ZLLoadMoreFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZLLoadMoreFooter.xib; sourceTree = "<group>"; };
 		E294DF8B1CA015B300018477 /* ZLNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLNewFeatureViewController.h; sourceTree = "<group>"; };
 		E294DF8C1CA015B300018477 /* ZLNewFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLNewFeatureViewController.m; sourceTree = "<group>"; };
 		E29FD7891CB53CC700F40633 /* ZLTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLTitleButton.h; sourceTree = "<group>"; };
@@ -331,6 +336,9 @@
 				E23311081C9952F200F1ACCD /* ZLTitleListTableViewController.m */,
 				E29FD7891CB53CC700F40633 /* ZLTitleButton.h */,
 				E29FD78A1CB53CC700F40633 /* ZLTitleButton.m */,
+				E260280F1CC4744F00532662 /* ZLLoadMoreFooter.h */,
+				E26028101CC4744F00532662 /* ZLLoadMoreFooter.m */,
+				E26028121CC4746C00532662 /* ZLLoadMoreFooter.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -634,6 +642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2496BCA1C8F009600B45EE1 /* Test1ViewController.xib in Resources */,
+				E26028131CC4746C00532662 /* ZLLoadMoreFooter.xib in Resources */,
 				E2496B451C8DAA1B00B45EE1 /* Images.xcassets in Resources */,
 				E23310FA1C93F22B00F1ACCD /* Text2ViewController.xib in Resources */,
 			);
@@ -734,6 +743,7 @@
 				E2496BC11C8F009600B45EE1 /* HomeViewController.m in Sources */,
 				E23311031C9933C300F1ACCD /* ZLSearchBar.m in Sources */,
 				E26028081CC1065800532662 /* Foundation+Log.m in Sources */,
+				E26028111CC4744F00532662 /* ZLLoadMoreFooter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
