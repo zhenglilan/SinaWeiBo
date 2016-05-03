@@ -17,7 +17,6 @@
     if (self) {
         // 图片居中
 //        self.imageView.contentMode = UIViewContentModeCenter;
-        self.backgroundColor = [UIColor redColor];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
         [self setImage:[UIImage imageNamed:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
@@ -36,14 +35,14 @@
 // 目的：想在系统计算和设置完按钮的尺寸后，再修改下尺寸
 /**
  *  重写setFrame:方法的目的：拦截设置按钮尺寸的过程
- *
+ *  如果想在系统设置完控件的尺寸以后，再做修改，而且要保证修改成功，一般都是在setFrame:中设置
  */
-- (void)setFrame:(CGRect)frame
-{
-    frame.size.width += ZLMargin;
-    [super setFrame:frame];
-    
-}
+//- (void)setFrame:(CGRect)frame
+//{
+//    frame.size.width += ZLMargin;
+//    [super setFrame:frame];
+//    
+//}
 
 - (void)layoutSubviews
 {
@@ -55,7 +54,7 @@
     // 1. 计算titleLabel的frame
     self.titleLabel.x = self.imageView.x;
     // 2. 计算imageView的frame
-    self.imageView.x = CGRectGetMaxX(self.titleLabel.frame) + 10;
+    self.imageView.x = CGRectGetMaxX(self.titleLabel.frame) + ZLMargin;
 }
 
 - (void)setTitle:(NSString *)title forState:(UIControlState)state

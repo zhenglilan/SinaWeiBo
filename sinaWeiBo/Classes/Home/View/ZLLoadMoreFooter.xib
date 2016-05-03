@@ -17,8 +17,8 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="u8K-h0-Q1u">
-                    <rect key="frame" x="280" y="0.0" width="194" height="45"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wNe-yi-mtj">
+                    <rect key="frame" x="415" y="13" width="20" height="20"/>
                 </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -27,14 +27,10 @@
                 <constraint firstAttribute="bottom" secondItem="Wsl-xD-J6R" secondAttribute="bottom" id="5iz-zm-nf9"/>
                 <constraint firstItem="Wsl-xD-J6R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="86u-3i-xXi"/>
                 <constraint firstItem="Wsl-xD-J6R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="CBp-0l-GvN"/>
-                <constraint firstAttribute="bottom" secondItem="u8K-h0-Q1u" secondAttribute="bottom" id="Fkc-qC-Kww"/>
-                <constraint firstItem="u8K-h0-Q1u" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="280" id="JcM-bh-gI7"/>
                 <constraint firstItem="Wsl-xD-J6R" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LPu-aM-9Sm"/>
                 <constraint firstAttribute="trailing" secondItem="Wsl-xD-J6R" secondAttribute="trailing" id="QJe-wt-yRp"/>
                 <constraint firstAttribute="trailing" secondItem="Wsl-xD-J6R" secondAttribute="trailing" id="VBr-aa-124"/>
-                <constraint firstItem="u8K-h0-Q1u" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Vp9-Dk-Tcm"/>
                 <constraint firstAttribute="bottom" secondItem="Wsl-xD-J6R" secondAttribute="bottom" id="WSi-xA-dOe"/>
-                <constraint firstAttribute="trailing" secondItem="u8K-h0-Q1u" secondAttribute="trailing" constant="175" id="jJM-zq-p1H"/>
                 <constraint firstItem="Wsl-xD-J6R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pDs-o9-Igt"/>
                 <constraint firstAttribute="bottom" secondItem="Wsl-xD-J6R" secondAttribute="bottom" id="qV0-Yf-w1h"/>
                 <constraint firstItem="Wsl-xD-J6R" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sZt-dh-tTh"/>

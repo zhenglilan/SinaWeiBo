@@ -16,11 +16,13 @@
 #import "ZLStatus.h"
 #import "MJExtension.h"
 #import "ZLLoadMoreFooter.h"
+#import "ZLStatusCell.h"
+#import "ZLStatusFrame.h"
 
 
 @interface HomeViewController ()<ZLDropDownMenuDelegate>
-/** 微博数组 （里面放的都是ZLStatus模型，一个ZLStatus对象代表一条微博*/
-@property (nonatomic, strong)NSMutableArray *statuses;
+/** 微博数组 （里面放的都是ZLStatusFrame模型，一个ZLStatusFrame对象代表一条微博*/
+@property (nonatomic, strong)NSMutableArray *statuseFrames;
 @end
 
 @implementation HomeViewController
@@ -29,16 +31,22 @@
  *
  *  @return statuses
  */
-- (NSMutableArray *)statuses
+- (NSMutableArray *)statuseFrames
 {
-    if (!_statuses) {
-        _statuses = [NSMutableArray array];
+    if (!_statuseFrames) {
+        _statuseFrames = [NSMutableArray array];
     }
-    return _statuses;
+    return _statuseFrames;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.backgroundColor = kColor(211, 211, 211);
+    // 每个大Cell之间的间距－－方法一：设置cell的内边距
+//    self.tableView.contentInset = UIEdgeInsetsMake(kStatusCellMargin, 0, 0, 0);
+    // 方法二： 原创微博整个的Y＋kstatusCellMargin
+    // 方法三： 重写setFrame方法，每个cell都加一定的高度。
     
     // 设置导航栏内容
     [self setupNav];
@@ -61,6 +69,11 @@
     //[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    ZLLog(@"viewWillAppear--%@", NSStringFromUIEdgeInsets(self.tableView.contentInset));
+//}
+
 /**
  *  集成上拉刷新控件
  */
@@ -77,6 +90,7 @@
  */
 - (void)setupDownRefresh
 {
+    
     // 1.添加刷新控件
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
         // 只有用户手动下拉刷新，才会触发UIControlEventValueChanged事件
@@ -90,6 +104,21 @@
     [self refreshStateChange:refreshControl];
 }
 
+/**
+ *  将ZLStatus数组 转为 ZLStatusFrame数组
+ *
+ *
+ */
+- (NSArray *)statusFrameWithStatus:(NSArray *)statuses {
+    //
+    NSMutableArray *frames = [NSMutableArray array];
+    for (ZLStatus *status in statuses) {
+        ZLStatusFrame *f = [[ZLStatusFrame alloc] init];
+        f.status = status;
+        [frames addObject:f];
+    }
+    return frames;
+}
 /**
  *  UIRefreshControl 进入刷新状态：加载最新数据
  */
@@ -105,15 +134,15 @@
     parameters[@"access_token"] = account.access_token;
     
     // 取出最前面的微博（最新的微博，ID最大的微博）
-    ZLStatus *firstStatus = [self.statuses firstObject];
-    if (firstStatus) {
+    ZLStatusFrame *firstStatusFrame = [self.statuseFrames firstObject];
+    if (firstStatusFrame) {
         // since_id	false	int64	若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
-        parameters[@"since_id"] = firstStatus.idstr;
+        parameters[@"since_id"] = firstStatusFrame.status.idstr;
     }
 
     // 3.发送请求
     [session GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
-       // ZLLog(@"关注人微博请求成功－%@",responseObject);
+        //ZLLog(@"关注人微博请求成功－%@",responseObject);
         
         /** 这段代码简化成下面那一句代码。
          // 取得 “微博字典” 数组
@@ -128,10 +157,13 @@
         // 将 “微博字典” 转为 “微博模型” 数组(MJExtension，利用下面这个方法，将微博字典数组 转为 微博模型数组)
         NSMutableArray *newStatuses = [ZLStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         
+        // 将ZLStatus数组 转为 ZLStatusFrame数组
+        NSArray *newFrames = [self statusFrameWithStatus:newStatuses];
+        
         // 将最新的微博数据，添加到总数组的最前面
         NSRange range = NSMakeRange(0, newStatuses.count);
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-        [self.statuses insertObjects:newStatuses atIndexes:indexSet];
+        [self.statuseFrames insertObjects:newFrames atIndexes:indexSet];
         
         // 刷新表格
         [self.tableView reloadData];
@@ -164,11 +196,11 @@
     Account *account = [AccountTool account];
     parames[@"access_token"] = account.access_token;
     // 取出最后面的微博（最新的微博，ID最大的微博）
-    ZLStatus *lastStatus = [self.statuses lastObject];
-    if (lastStatus) {
+    ZLStatusFrame *lastStatusFrame = [self.statuseFrames lastObject];
+    if (lastStatusFrame) {
         // 若指定次参数，则返回ID小于或等于max_id的微博，默认为0
         // id这种数据一般是比较大的，一般转成整数的话，最好是long long类型
-        long long maxID = lastStatus.idstr.longLongValue - 1;
+        long long maxID = lastStatusFrame.status.idstr.longLongValue - 1;
         parames[@"max_id"] = @(maxID);
     }
     
@@ -178,8 +210,10 @@
         // 将 “微博字典”数组 转为 “微博模型”数组
         NSArray *newStatuses = [ZLStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         
+        NSArray *newStatusFrames = [self statusFrameWithStatus:newStatuses];
+        
         // 将更多的微博数据，添加到总数组到最后面
-        [self.statuses addObjectsFromArray:newStatuses];
+        [self.statuseFrames addObjectsFromArray:newStatusFrames];
         
         // 刷新表格
         [self.tableView reloadData];
@@ -198,7 +232,7 @@
  */
 - (void)setupUnreadCount
 {
-    ZLLog(@"setupUnreadCount");
+    //ZLLog(@"setupUnreadCount");
     // 1.请求管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/html",@"text/plain", nil];
@@ -281,50 +315,6 @@
     }];
 }
 
-
-
-/**
- *  加载最新的微博数据
- *  https://api.weibo.com/2/statuses/friends_timeline.json
- *  请求参数：access_token	true	string	采用OAuth授权方式为必填参数，OAuth授权后获得
- *  count	false	int	单页返回的记录条数，最大不超过100，默认为20。
- */
-- (void)loadNewStatus
-{
-    // 1.请求管理者
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/html", @"text/plain", nil];
-    
-    // 2.请求参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    Account *account = [AccountTool account];
-    parameters[@"access_token"] = account.access_token;
-//    parameters[@"count"] = @10;
-    
-    // 3.发送请求
-    [session GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
-//        ZLLog(@"关注人微博请求成功－%@",responseObject);
-        
-        /** 这段代码简化成下面那一句代码。
-        // 取得 “微博字典” 数组
-        NSArray *dicArray = responseObject[@"statuses"];
-        // 将 “微博字典” 转为 “微博模型” 数组
-        for (NSDictionary *dictionary in dicArray) {
-            ZLStatus *status = [ZLStatus mj_objectWithKeyValues:dictionary];
-            [self.statuses addObject:status];
-        }
-        */
-        
-        // 将 “微博字典” 转为 “微博模型” 数组(MJExtension，利用下面这个方法，将微博字典数组 转为 微博模型数组)
-        self.statuses = [ZLStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
-        
-        // 刷新表格
-        [self.tableView reloadData];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        ZLLog(@"关注人微博请求失败－%@",error);
-    }];
-}
 
 /**
  *  获取用户信息（昵称）
@@ -458,38 +448,28 @@
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return [self.statuses count];
+    return [self.statuseFrames count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellID = @"status";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
-    }
+    ZLStatusCell *cell = [ZLStatusCell cellWithTableView:tableView];
     
-    // 取出这行对应的微博字典
-//    NSDictionary *statusDic = [self.statuses objectAtIndex:indexPath.row];
-    ZLStatus *status = self.statuses[indexPath.row];
+    cell.statusFrame = self.statuseFrames[indexPath.row];
     
-    // 设置微博的文字
-//    cell.detailTextLabel.text = statusDic[@"text"];
-    cell.detailTextLabel.text = status.text;
-    
-    // 取出微博的用户作者的用户信息（user）
-        // 用户名称
-//    NSDictionary *userDic = statusDic[@"user"];
-//    cell.textLabel.text = userDic[@"name"];
-    ZLUser *user = status.user;
-    cell.textLabel.text = user.name;
-    
-        // 用户头像
-//    NSString *imageURL = userDic[@"profile_image_url"];
-//    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"avatar_default_small"]];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:user.profile_image_url] placeholderImage:[UIImage imageNamed:@"avatar_default_small"]];
-
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ZLStatusFrame *statusFrames = self.statuseFrames[indexPath.row];
+    return statusFrames.cellHeight;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+
 }
 
 /**
@@ -499,7 +479,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     // 如果tableview没有数据就直接返回
-    if (self.statuses.count == 0 || self.tableView.tableFooterView.isHidden == NO) return;
+    if (self.statuseFrames.count == 0 || self.tableView.tableFooterView.isHidden == NO) return;
     
     // 当最后一个cell完全显示在眼前，contentOffset的y值
     CGFloat offsetY = scrollView.contentOffset.y;

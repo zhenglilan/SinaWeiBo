@@ -19,4 +19,10 @@
     return user;
 }
 */
-@end
+
+-(void)setMbtype:(int)mbtype
+{
+    _mbtype = mbtype;
+    self.VIP = _mbtype > 2;
+}
+@end   

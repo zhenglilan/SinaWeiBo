@@ -7,6 +7,8 @@
 //
 
 #import "ZLStatus.h"
+#import "ZLPhoto.h"
+#import "MJExtension.h"
 
 @implementation ZLStatus
 /*
@@ -19,4 +21,11 @@
     return status;
 }
  */
+
++ (NSDictionary *) mj_objectClassInArray
+{
+    return @{@"pic_urls": @"ZLPhoto"};
+    // 或者
+//    return @{@"pic_urls": [ZLPhoto class]};
+}
 @end

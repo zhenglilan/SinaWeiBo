@@ -10,16 +10,27 @@
 #import <Foundation/Foundation.h>
 
 @interface ZLUser : NSObject
-
+/**
+ *  string	字符串型的用户UID
+ */
 @property (nonatomic, copy)NSString *idstr;
 /**
  *  string	用户头像地址（中图），50×50像素
  */
 @property (nonatomic, copy)NSString *profile_image_url;
 /**
- *  string	字符串型的用户UID
+ *  string  用户昵称
  */
 @property (nonatomic, copy)NSString *name;
+
+/** 会员类型的值> 2 才代表是会员*/
+@property (nonatomic, assign) int mbtype;
+
+/** 会员等级*/
+@property (nonatomic, assign) int mbrank;
+
+/** 是否是会员*/
+@property (nonatomic, assign, getter=isVIP) BOOL VIP;
 
 //+ (instancetype)userWithDictionary:(NSDictionary *)dic;
 @end
