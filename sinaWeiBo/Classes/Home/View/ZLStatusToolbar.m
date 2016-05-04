@@ -74,9 +74,9 @@
 {
     _status = status;
     
-    status.reposts_count = 230000; // 23万
-    status.comments_count = 12345; // 1.2万
-    status.attitudes_count = 490; // 490
+//    status.reposts_count = 230000; // 23万
+//    status.comments_count = 12345; // 1.2万
+//    status.attitudes_count = 490; // 490
     // 转发
     [self setupBtnTitleWithCount:self.status.reposts_count button:self.repostBtn title:@"转发"];
     // 评论

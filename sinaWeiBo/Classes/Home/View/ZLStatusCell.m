@@ -98,13 +98,20 @@
     self.nameLabel.text = user.name;
     
     /** 时间*/
-    self.timeLabel.frame = statusFrame.timeLabelFrame;
-    self.timeLabel.text = status.created_at;
-    
+    NSString *creatTime = status.created_at;
+    CGFloat timeX = self.nameLabel.x;
+    CGFloat timeY = CGRectGetMaxY(self.nameLabel.frame) + kStatusCellBorderW;
+    CGSize timeSize = [creatTime sizeWithfont:kStatusCellTimeFont];
+    self.timeLabel.frame = (CGRect){{timeX, timeY}, timeSize};
+    self.timeLabel.text = creatTime;
+
     /** 来源*/
-    self.sourceLabel.frame = statusFrame.sourceLabelFrame;
+    CGFloat sourceX = CGRectGetMaxX(self.timeLabel.frame) + kStatusCellBorderW;
+    CGFloat sourceY = timeY;
+    CGSize sourceSize = [status.source sizeWithfont:kStatusCellSourceFont];
+    self.sourceLabel.frame = (CGRect){{sourceX, sourceY}, sourceSize};
     self.sourceLabel.text = status.source;
-    
+
     /** 正文*/
     self.contentLabel.frame = statusFrame.contentLabelFrame;
     self.contentLabel.text = status.text;
@@ -203,12 +210,14 @@
     UILabel *timeLabel = [[UILabel alloc] init];
     [self.originView addSubview:timeLabel];
     timeLabel.font = kStatusCellTimeFont;
+    timeLabel.textColor = [UIColor grayColor];
     self.timeLabel = timeLabel;
     
     /** 来源*/
     UILabel *sourceLabel = [[UILabel alloc] init];
     [self.originView addSubview:sourceLabel];
     sourceLabel.font = kStatusCellSourceFont;
+    sourceLabel.textColor = [UIColor grayColor];
     self.sourceLabel = sourceLabel;
     
     /** 正文*/

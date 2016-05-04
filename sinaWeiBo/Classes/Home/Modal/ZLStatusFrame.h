@@ -19,6 +19,8 @@
 #define kStatusCellRetweetContentFont kStatusCellContentFont
 // cell 的间距
 #define kStatusCellMargin 10
+// cell 的边框宽度
+#define kStatusCellBorderW 10
 
 
 @class ZLStatus;

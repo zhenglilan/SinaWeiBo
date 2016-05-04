@@ -154,7 +154,7 @@
          }
          */
         
-        // 将 “微博字典” 转为 “微博模型” 数组(MJExtension，利用下面这个方法，将微博字典数组 转为 微博模型数组)
+        // 将 “微博字典”数组 转为 “微博模型” 数组(MJExtension，利用下面这个方法，将微博字典数组 转为 微博模型数组)
         NSMutableArray *newStatuses = [ZLStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         
         // 将ZLStatus数组 转为 ZLStatusFrame数组

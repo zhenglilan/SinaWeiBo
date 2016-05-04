@@ -10,25 +10,12 @@
 #import "ZLStatus.h"
 #import "ZLUser.h"
 
-// cell 的边框宽度
-#define kStatusCellBorderW 10
+
 
 
 
 @implementation ZLStatusFrame
 
-- (CGSize) sizeWithText:(NSString *)text font:(UIFont *)font maxWidth:(CGFloat)maxWidth
-{
-    NSMutableDictionary *attri = [NSMutableDictionary dictionary];
-    attri[NSFontAttributeName] = font;
-    CGSize maxSize = CGSizeMake(maxWidth, MAXFLOAT);
-    return [text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attri context:nil].size;
-}
-
-- (CGSize) sizeWithText:(NSString *)text font:(UIFont *)font
-{
-    return [self sizeWithText:text font:font maxWidth:MAXFLOAT];
-}
 
 - (void)setStatus:(ZLStatus *)status
 {
@@ -49,7 +36,7 @@
     /** 昵称*/
     CGFloat nameX = CGRectGetMaxX(self.iconImageViewFrame) + kStatusCellBorderW;
     CGFloat nameY = iconY;
-    CGSize nameSize = [self sizeWithText:user.name font:kStatusCellNameFont];
+    CGSize nameSize = [user.name sizeWithfont:kStatusCellNameFont];
 //    self.nameLabelFrame = CGRectMake(nameX, nameY, nameSize.width, nameSize.height);
     self.nameLabelFrame = (CGRect){{nameX, nameY}, nameSize};
     
@@ -65,13 +52,13 @@
     /** 时间*/
     CGFloat timeX = nameX;
     CGFloat timeY = CGRectGetMaxY(self.nameLabelFrame) + kStatusCellBorderW;
-    CGSize timeSize = [self sizeWithText:status.created_at font:kStatusCellTimeFont];
+    CGSize timeSize = [status.created_at sizeWithfont:kStatusCellTimeFont];
     self.timeLabelFrame = (CGRect){{timeX, timeY}, timeSize};
     
     /** 来源*/
     CGFloat sourceX = CGRectGetMaxX(self.timeLabelFrame) + kStatusCellBorderW;
     CGFloat sourceY = timeY;
-    CGSize sourceSize = [self sizeWithText:status.source font:kStatusCellSourceFont];
+    CGSize sourceSize = [status.source sizeWithfont:kStatusCellSourceFont];
     self.sourceLabelFrame = (CGRect){{sourceX, sourceY}, sourceSize};
     
     /** 正文*/
@@ -79,7 +66,7 @@
         // 正文的y值需要取 头像和时间的最大Y值
     CGFloat contentY = MAX(CGRectGetMaxY(self.iconImageViewFrame), CGRectGetMaxY(self.timeLabelFrame)) + kStatusCellBorderW;
     CGFloat maxW = cellW - 2 * contentX;
-    CGSize contentSize = [self sizeWithText:status.text font:kStatusCellContentFont maxWidth:maxW];
+    CGSize contentSize = [status.text sizeWithfont:kStatusCellContentFont maxWidth:maxW];
     self.contentLabelFrame = (CGRect){{contentX, contentY}, contentSize};
     
     /** 配图*/
@@ -108,7 +95,7 @@
         /** 被转发微博的正文 ＋ 昵称*/
         CGFloat retweetContentX = kStatusCellBorderW;
         CGFloat retweetContentY = kStatusCellBorderW;
-        CGSize retweetContentSize = [self sizeWithText:status.retweeted_status.text font:kStatusCellRetweetContentFont maxWidth:maxW];
+        CGSize retweetContentSize = [status.retweeted_status.text sizeWithfont:kStatusCellRetweetContentFont maxWidth:maxW];
         self.retweetContentLabelFrame = (CGRect){{retweetContentX, retweetContentY}, retweetContentSize};
         
         /** 被转发微博的配图*/

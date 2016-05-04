@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E2268B371CD9026B00B46B22 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2268B361CD9026B00B46B22 /* NSDate+Extension.m */; };
 		E23310F91C93F22B00F1ACCD /* Text2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E23310F71C93F22B00F1ACCD /* Text2ViewController.m */; };
 		E23310FA1C93F22B00F1ACCD /* Text2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23310F81C93F22B00F1ACCD /* Text2ViewController.xib */; };
 		E23311031C9933C300F1ACCD /* ZLSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E23311021C9933C300F1ACCD /* ZLSearchBar.m */; };
@@ -42,6 +43,7 @@
 		E294DF8D1CA015B300018477 /* ZLNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E294DF8C1CA015B300018477 /* ZLNewFeatureViewController.m */; };
 		E29D77131CD065090042E5C0 /* ZLPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E29D77121CD065090042E5C0 /* ZLPhoto.m */; };
 		E29FD78B1CB53CC700F40633 /* ZLTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E29FD78A1CB53CC700F40633 /* ZLTitleButton.m */; };
+		E2C168881CD9FD1900AF3C16 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C168871CD9FD1900AF3C16 /* NSString+Extension.m */; };
 		E2D29F8E1CD87C9000A1C29D /* ZLStatusToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D29F8D1CD87C9000A1C29D /* ZLStatusToolbar.m */; };
 		E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAE4171C999E260016CDE1 /* ZLTabBar.m */; };
 		E953B9866D1139FA64C3A65D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CECFBAEB0722763803608EF /* libPods.a */; };
@@ -68,6 +70,8 @@
 		7CECFBAEB0722763803608EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6088507FCFDF280369AFECB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C5700A17FC3401B71A44BE30 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		E2268B351CD9026B00B46B22 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		E2268B361CD9026B00B46B22 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		E23310F61C93F22B00F1ACCD /* Text2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Text2ViewController.h; sourceTree = "<group>"; };
 		E23310F71C93F22B00F1ACCD /* Text2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Text2ViewController.m; sourceTree = "<group>"; };
 		E23310F81C93F22B00F1ACCD /* Text2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Text2ViewController.xib; sourceTree = "<group>"; };
@@ -115,7 +119,6 @@
 		E2496C0B1C8F0C1C00B45EE1 /* ItemTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemTool.m; path = ../../ItemTool.m; sourceTree = "<group>"; };
 		E2496C7D1C8F135C00B45EE1 /* UIBarButtonItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extension.h"; sourceTree = "<group>"; };
 		E2496C7E1C8F135C00B45EE1 /* UIBarButtonItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extension.m"; sourceTree = "<group>"; };
-		E2496C7F1C8F135C00B45EE1 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		E2496C801C8F135C00B45EE1 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		E24FFAED1CA3C94800949179 /* ZLOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLOAuthViewController.h; sourceTree = "<group>"; };
 		E24FFAEE1CA3C94800949179 /* ZLOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLOAuthViewController.m; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 		E29D77121CD065090042E5C0 /* ZLPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPhoto.m; sourceTree = "<group>"; };
 		E29FD7891CB53CC700F40633 /* ZLTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLTitleButton.h; sourceTree = "<group>"; };
 		E29FD78A1CB53CC700F40633 /* ZLTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLTitleButton.m; sourceTree = "<group>"; };
+		E2C168861CD9FD1900AF3C16 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		E2C168871CD9FD1900AF3C16 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		E2D29F8C1CD87C9000A1C29D /* ZLStatusToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusToolbar.h; sourceTree = "<group>"; };
 		E2D29F8D1CD87C9000A1C29D /* ZLStatusToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatusToolbar.m; sourceTree = "<group>"; };
 		E2D29F8F1CD8825E00A1C29D /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -511,11 +516,14 @@
 				E26028071CC1065800532662 /* Foundation+Log.m */,
 				E2496C7D1C8F135C00B45EE1 /* UIBarButtonItem+Extension.h */,
 				E2496C7E1C8F135C00B45EE1 /* UIBarButtonItem+Extension.m */,
-				E2496C7F1C8F135C00B45EE1 /* UIView+Extension.h */,
 				E247E2D01CB4F13100BB1CE9 /* UIWindow+Extension.m */,
 				E247E2CF1CB4F13100BB1CE9 /* UIWindow+Extension.h */,
-				E2D29F8F1CD8825E00A1C29D /* UIView+Extension.h */,
 				E2496C801C8F135C00B45EE1 /* UIView+Extension.m */,
+				E2D29F8F1CD8825E00A1C29D /* UIView+Extension.h */,
+				E2268B351CD9026B00B46B22 /* NSDate+Extension.h */,
+				E2268B361CD9026B00B46B22 /* NSDate+Extension.m */,
+				E2C168861CD9FD1900AF3C16 /* NSString+Extension.h */,
+				E2C168871CD9FD1900AF3C16 /* NSString+Extension.m */,
 				E2496BAB1C8F009600B45EE1 /* main.m */,
 			);
 			path = Category;
@@ -627,6 +635,7 @@
 				TargetAttributes = {
 					E2496B341C8DAA1B00B45EE1 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 582HYD8XLE;
 					};
 					E2496B4D1C8DAA1B00B45EE1 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -755,10 +764,12 @@
 				E2496BC41C8F009600B45EE1 /* ZLLNavigationViewController.m in Sources */,
 				E2496BC31C8F009600B45EE1 /* MainTabBarController.m in Sources */,
 				E2496BC91C8F009600B45EE1 /* Test1ViewController.m in Sources */,
+				E2C168881CD9FD1900AF3C16 /* NSString+Extension.m in Sources */,
 				E24FFAEF1CA3C94800949179 /* ZLOAuthViewController.m in Sources */,
 				E2496BC71C8F009600B45EE1 /* MessageCenterViewController.m in Sources */,
 				E247E2CA1CB3CB6C00BB1CE9 /* Account.m in Sources */,
 				E2496BC61C8F009600B45EE1 /* main.m in Sources */,
+				E2268B371CD9026B00B46B22 /* NSDate+Extension.m in Sources */,
 				E23311091C9952F200F1ACCD /* ZLTitleListTableViewController.m in Sources */,
 				E260280B1CC24BE000532662 /* ZLUser.m in Sources */,
 				E2D29F8E1CD87C9000A1C29D /* ZLStatusToolbar.m in Sources */,
@@ -891,12 +902,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = /Users/zhenglilan/Desktop/Developer/sinaWeiBo_commit/sinaWeiBo/PrefixHeader.pch;
 				INFOPLIST_FILE = sinaWeiBo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhenglilan.instructor.sinaWeiBo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -906,12 +920,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = /Users/zhenglilan/Desktop/Developer/sinaWeiBo_commit/sinaWeiBo/PrefixHeader.pch;
 				INFOPLIST_FILE = sinaWeiBo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhenglilan.instructor.sinaWeiBo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
