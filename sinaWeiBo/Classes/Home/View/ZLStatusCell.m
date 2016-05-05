@@ -13,6 +13,8 @@
 #import "ZLUser.h"
 #import "ZLPhoto.h"
 #import "ZLStatusToolbar.h"
+#import "ZLStatusPhotosView.h"
+
 
 @interface ZLStatusCell()
 /* 原创微博*/
@@ -23,7 +25,7 @@
 /** VIP*/
 @property (nonatomic, weak)UIImageView *vipImageView;
 /** 配图*/
-@property (nonatomic, weak)UIImageView *photoImageView;
+@property (nonatomic, weak)ZLStatusPhotosView *photosView;
 /** 昵称*/
 @property (nonatomic, weak)UILabel *nameLabel;
 /** 时间*/
@@ -39,7 +41,7 @@
 /** 转发微博的正文 ＋ 昵称*/
 @property (nonatomic, weak) UILabel *retweetContentLabel;
 /** 转发微博的配图*/
-@property (nonatomic, weak) UIImageView *retweetPhotoImage;
+@property (nonatomic, weak) ZLStatusPhotosView *retweetPhotosView;
 
 /** 工具条*/
 @property (nonatomic, weak) ZLStatusToolbar *toolbar;
@@ -85,12 +87,11 @@
     
     /** 配图*/
     if (status.pic_urls.count) {
-        self.photoImageView.frame = statusFrame.photoImageViewFrame;
-        ZLPhoto *photo = [status.pic_urls firstObject];
-        [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:photo.thumbnail_pic] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder"]];
-        self.photoImageView.hidden = NO;
+        self.photosView.frame = statusFrame.photosViewFrame;
+        self.photosView.photos = status.pic_urls;
+        self.photosView.hidden = NO;
     }else {
-        self.photoImageView.hidden = YES;
+        self.photosView.hidden = YES;
     }
     
     /** 昵称*/
@@ -129,13 +130,11 @@
     
     /** 被转发微博配图*/
     if (retweetStatus) {
-        self.retweetPhotoImage.hidden = NO;
-        self.retweetPhotoImage.frame = statusFrame.retweetPhotoImageFrame;
-        ZLPhoto *photo = [retweetStatus.pic_urls firstObject];
-        [self.retweetPhotoImage sd_setImageWithURL:[NSURL URLWithString:photo.thumbnail_pic] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder"]];
-
+        self.retweetPhotosView.hidden = NO;
+        self.retweetPhotosView.photos = status.retweeted_status.pic_urls;
+        self.retweetPhotosView.frame = statusFrame.retweetPhotosFrame;
     } else {
-        self.retweetPhotoImage.hidden = YES;
+        self.retweetPhotosView.hidden = YES;
     }
     
     /** 工具条*/
@@ -196,9 +195,9 @@
     self.vipImageView = vipImageView;
     
     /** 配图*/
-    UIImageView *photoImageView = [[UIImageView alloc] init];
-    [self.originView addSubview:photoImageView];
-    self.photoImageView = photoImageView;
+    ZLStatusPhotosView *photosView = [[ZLStatusPhotosView alloc] init];
+    [self.originView addSubview:photosView];
+    self.photosView = photosView;
     
     /** 昵称*/
     UILabel *nameLabel = [[UILabel alloc] init];
@@ -246,9 +245,9 @@
     self.retweetContentLabel = retweetContentLabel;
     
     /** 转发微博的配图*/
-    UIImageView *retweetPhotoImage = [[UIImageView alloc] init];
-    [self.retweetView addSubview:retweetPhotoImage];
-    self.retweetPhotoImage = retweetPhotoImage;
+    ZLStatusPhotosView *retweetPhotosView = [[ZLStatusPhotosView alloc] init];
+    [self.retweetView addSubview:retweetPhotosView];
+    self.retweetPhotosView = retweetPhotosView;
 }
 
 /**

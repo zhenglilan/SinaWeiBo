@@ -96,7 +96,7 @@
     _source = source;
     //<a href="http://weibo.com/" rel="nofollow">微博 weibo.com</a>
     // <a href="http://app.weibo.com/t/feed/1tqBja" rel="nofollow">360安全浏览器</a>
-    ZLLog(@"%@",_source);
+
     // 1.正则表达式 NSRegularExpression
     // 2. 截串 NSString
     NSRange range;

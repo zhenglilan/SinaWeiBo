@@ -46,6 +46,8 @@
 		E2C168881CD9FD1900AF3C16 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C168871CD9FD1900AF3C16 /* NSString+Extension.m */; };
 		E2D29F8E1CD87C9000A1C29D /* ZLStatusToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D29F8D1CD87C9000A1C29D /* ZLStatusToolbar.m */; };
 		E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAE4171C999E260016CDE1 /* ZLTabBar.m */; };
+		E2F492801CDAEB4F00F4BCBD /* ZLStatusPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F4927F1CDAEB4F00F4BCBD /* ZLStatusPhotosView.m */; };
+		E2F492831CDB160D00F4BCBD /* ZLStatusPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F492821CDB160D00F4BCBD /* ZLStatusPhotoView.m */; };
 		E953B9866D1139FA64C3A65D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CECFBAEB0722763803608EF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +149,10 @@
 		E2D29F8F1CD8825E00A1C29D /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		E2DAE4161C999E260016CDE1 /* ZLTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLTabBar.h; sourceTree = "<group>"; };
 		E2DAE4171C999E260016CDE1 /* ZLTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLTabBar.m; sourceTree = "<group>"; };
+		E2F4927E1CDAEB4F00F4BCBD /* ZLStatusPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusPhotosView.h; sourceTree = "<group>"; };
+		E2F4927F1CDAEB4F00F4BCBD /* ZLStatusPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatusPhotosView.m; sourceTree = "<group>"; };
+		E2F492811CDB160D00F4BCBD /* ZLStatusPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusPhotoView.h; sourceTree = "<group>"; };
+		E2F492821CDB160D00F4BCBD /* ZLStatusPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatusPhotoView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +371,10 @@
 				E25877B01CCE11FD000704D9 /* ZLStatusCell.m */,
 				E2D29F8C1CD87C9000A1C29D /* ZLStatusToolbar.h */,
 				E2D29F8D1CD87C9000A1C29D /* ZLStatusToolbar.m */,
+				E2F4927E1CDAEB4F00F4BCBD /* ZLStatusPhotosView.h */,
+				E2F4927F1CDAEB4F00F4BCBD /* ZLStatusPhotosView.m */,
+				E2F492811CDB160D00F4BCBD /* ZLStatusPhotoView.h */,
+				E2F492821CDB160D00F4BCBD /* ZLStatusPhotoView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -755,6 +765,7 @@
 				E260280E1CC24BEA00532662 /* ZLStatus.m in Sources */,
 				E29FD78B1CB53CC700F40633 /* ZLTitleButton.m in Sources */,
 				E23310F91C93F22B00F1ACCD /* Text2ViewController.m in Sources */,
+				E2F492801CDAEB4F00F4BCBD /* ZLStatusPhotosView.m in Sources */,
 				E23311061C993AF300F1ACCD /* ZLDropDownMenu.m in Sources */,
 				E2496BC01C8F009600B45EE1 /* DiscoverViewController.m in Sources */,
 				E294DF8D1CA015B300018477 /* ZLNewFeatureViewController.m in Sources */,
@@ -765,6 +776,7 @@
 				E2496BC31C8F009600B45EE1 /* MainTabBarController.m in Sources */,
 				E2496BC91C8F009600B45EE1 /* Test1ViewController.m in Sources */,
 				E2C168881CD9FD1900AF3C16 /* NSString+Extension.m in Sources */,
+				E2F492831CDB160D00F4BCBD /* ZLStatusPhotoView.m in Sources */,
 				E24FFAEF1CA3C94800949179 /* ZLOAuthViewController.m in Sources */,
 				E2496BC71C8F009600B45EE1 /* MessageCenterViewController.m in Sources */,
 				E247E2CA1CB3CB6C00BB1CE9 /* Account.m in Sources */,

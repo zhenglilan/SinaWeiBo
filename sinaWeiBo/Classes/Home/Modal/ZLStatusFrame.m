@@ -9,14 +9,9 @@
 #import "ZLStatusFrame.h"
 #import "ZLStatus.h"
 #import "ZLUser.h"
-
-
-
-
+#import "ZLStatusPhotosView.h"
 
 @implementation ZLStatusFrame
-
-
 - (void)setStatus:(ZLStatus *)status
 {
     _status = status;
@@ -72,12 +67,13 @@
     /** 配图*/
     CGFloat originH = 0;
     if (status.pic_urls.count) {
-        CGFloat photoWH = 100;
+        CGSize photosSize = [ZLStatusPhotosView sizeWithCount:status.pic_urls.count];
         CGFloat photoX = contentX;
         CGFloat photoY = CGRectGetMaxY(self.contentLabelFrame) + kStatusCellBorderW;
-        self.photoImageViewFrame = CGRectMake(photoX, photoY, photoWH, photoWH);
+        self.photosViewFrame = (CGRect){{photoX, photoY}, photosSize};
+        
         // 原创微博整个的高度
-        originH = CGRectGetMaxY(self.photoImageViewFrame) + kStatusCellBorderW;
+        originH = CGRectGetMaxY(self.photosViewFrame) + kStatusCellBorderW;
     }else {
         originH = CGRectGetMaxY(self.contentLabelFrame) + kStatusCellBorderW;
     }
@@ -103,9 +99,9 @@
         if (status.retweeted_status.pic_urls.count) {
             CGFloat retweetPhotoX = retweetContentX;
             CGFloat retweetPhotoY = CGRectGetMaxY(self.retweetContentLabelFrame) + kStatusCellBorderW;
-            CGFloat retweetPhotoWH = 100;
-            self.retweetPhotoImageFrame = (CGRect){{retweetPhotoX, retweetPhotoY}, retweetPhotoWH};
-            retweetViewH = CGRectGetMaxY(self.retweetPhotoImageFrame) + kStatusCellBorderW;
+            CGSize retweetPhotosViewWH = [ZLStatusPhotosView sizeWithCount:status.retweeted_status.pic_urls.count];
+            self.retweetPhotosFrame = (CGRect){{retweetPhotoX, retweetPhotoY}, retweetPhotosViewWH};
+            retweetViewH = CGRectGetMaxY(self.retweetPhotosFrame) + kStatusCellBorderW;
             
         }else {
             retweetViewH = CGRectGetMaxY(self.retweetContentLabelFrame) + kStatusCellBorderW;

@@ -119,7 +119,7 @@
     UIButton *btn = [[UIButton alloc] init];
     [btn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
     [btn setTitle:title forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [btn setImageEdgeInsets: UIEdgeInsetsMake(0, 0, 0, 5)];
     [btn setBackgroundImage:[UIImage imageNamed:@"timeline_card_bottom_background_highlighted"] forState:UIControlStateHighlighted];
     btn.titleLabel.font = [UIFont systemFontOfSize:12];
