@@ -56,7 +56,7 @@
      // 设置图片的尺寸和位置
     NSInteger photosCount = self.photos.count;
     for (int i = 0; i < photosCount; i++) {
-        UIImageView *photoView = self.subviews[i];
+        ZLStatusPhotoView *photoView = self.subviews[i];
         
         NSInteger maxCol = kStatusPhotoMaxCol(photosCount);
         NSInteger cols = i % maxCol;

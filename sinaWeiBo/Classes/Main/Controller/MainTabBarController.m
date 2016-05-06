@@ -13,6 +13,7 @@
 #import "ProfileViewController.h"
 #import "ZLLNavigationViewController.h"
 #import "ZLTabBar.h"
+#import "ZLComposeViewController.h"
 
 @interface MainTabBarController ()<ZLTabBarDelegate>
 
@@ -109,9 +110,9 @@
 #pragma mark -- ZLTabBar的代理方法
 - (void)tabBarDidClickPlusBtn:(ZLTabBar *)tabbar
 {
-    UIViewController *vc = [[UIViewController alloc] init];
-    vc.view.backgroundColor = [UIColor grayColor];
-    [self presentViewController:vc animated:YES completion:nil];
+    ZLComposeViewController *vc = [[ZLComposeViewController alloc] init];
+    ZLLNavigationViewController *nav = [[ZLLNavigationViewController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
     
 }
 

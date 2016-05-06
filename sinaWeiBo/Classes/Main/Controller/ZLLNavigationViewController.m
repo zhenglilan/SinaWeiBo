@@ -19,18 +19,19 @@
     // 设置整个项目所有item的主题样式
     UIBarButtonItem *item = [UIBarButtonItem appearance];
     // 设置普通状态
-    // key: NS****AttributeName
-    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:13];
-    [item setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
-    textAttrs[NSForegroundColorAttributeName] = [UIColor orangeColor];
-
-    // 设置不可点状态
-    // key: NS****AttributeName
-    NSMutableDictionary *disableTextAttrs = [NSMutableDictionary dictionary];
-    disableTextAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:13];
-    [item setTitleTextAttributes:disableTextAttrs forState:UIControlStateDisabled];
-    disableTextAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
+        // key: NS****AttributeName
+        NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+        textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:15];
+        [item setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
+        textAttrs[NSForegroundColorAttributeName] = [UIColor orangeColor];
+    
+        // 设置不可点状态
+        // key: NS****AttributeName
+        NSMutableDictionary *disableTextAttrs = [NSMutableDictionary dictionary];
+        disableTextAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
+        disableTextAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:15];
+        [item setTitleTextAttributes:disableTextAttrs forState:UIControlStateDisabled];
+    
 }
 
 /** 重写这个方法的目的是能够拦截push进来的控制器

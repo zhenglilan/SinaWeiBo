@@ -23,7 +23,7 @@
     
     /** －－－－原创微博－－－－*/
     /** 头像图片*/
-    CGFloat iconWH = 50;
+    CGFloat iconWH = 40;
     CGFloat iconX = kStatusCellBorderW;
     CGFloat iconY = kStatusCellBorderW;
     self.iconImageViewFrame = CGRectMake(iconX, iconY, iconWH, iconWH);

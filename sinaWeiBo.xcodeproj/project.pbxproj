@@ -48,6 +48,10 @@
 		E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAE4171C999E260016CDE1 /* ZLTabBar.m */; };
 		E2F492801CDAEB4F00F4BCBD /* ZLStatusPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F4927F1CDAEB4F00F4BCBD /* ZLStatusPhotosView.m */; };
 		E2F492831CDB160D00F4BCBD /* ZLStatusPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F492821CDB160D00F4BCBD /* ZLStatusPhotoView.m */; };
+		E2F492861CDB43B800F4BCBD /* ZLIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F492851CDB43B800F4BCBD /* ZLIconView.m */; };
+		E2F492961CDC3F2F00F4BCBD /* ZLComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F492951CDC3F2F00F4BCBD /* ZLComposeViewController.m */; };
+		E2F4929F1CDC898800F4BCBD /* ZLPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F4929E1CDC898800F4BCBD /* ZLPlaceholderTextView.m */; };
+		E2F492A21CDCB4A200F4BCBD /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F492A11CDCB4A200F4BCBD /* MBProgressHUD+MJ.m */; };
 		E953B9866D1139FA64C3A65D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CECFBAEB0722763803608EF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -153,6 +157,14 @@
 		E2F4927F1CDAEB4F00F4BCBD /* ZLStatusPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatusPhotosView.m; sourceTree = "<group>"; };
 		E2F492811CDB160D00F4BCBD /* ZLStatusPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusPhotoView.h; sourceTree = "<group>"; };
 		E2F492821CDB160D00F4BCBD /* ZLStatusPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatusPhotoView.m; sourceTree = "<group>"; };
+		E2F492841CDB43B800F4BCBD /* ZLIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLIconView.h; sourceTree = "<group>"; };
+		E2F492851CDB43B800F4BCBD /* ZLIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLIconView.m; sourceTree = "<group>"; };
+		E2F492941CDC3F2F00F4BCBD /* ZLComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLComposeViewController.h; sourceTree = "<group>"; };
+		E2F492951CDC3F2F00F4BCBD /* ZLComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLComposeViewController.m; sourceTree = "<group>"; };
+		E2F4929D1CDC898800F4BCBD /* ZLPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPlaceholderTextView.h; sourceTree = "<group>"; };
+		E2F4929E1CDC898800F4BCBD /* ZLPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPlaceholderTextView.m; sourceTree = "<group>"; };
+		E2F492A01CDCB4A200F4BCBD /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
+		E2F492A11CDCB4A200F4BCBD /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +290,7 @@
 		E2496B6B1C8DAA5F00B45EE1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E2F492891CDC3DBF00F4BCBD /* Compose */,
 				E24FFAEB1CA3C92800949179 /* OAuth */,
 				E294DF891C9FE49000018477 /* NewFeature */,
 				E2496B911C8F009600B45EE1 /* Discover */,
@@ -406,6 +419,8 @@
 		E2496BA61C8F009600B45EE1 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				E2F492A01CDCB4A200F4BCBD /* MBProgressHUD+MJ.h */,
+				E2F492A11CDCB4A200F4BCBD /* MBProgressHUD+MJ.m */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -435,6 +450,10 @@
 				E23311051C993AF300F1ACCD /* ZLDropDownMenu.m */,
 				E2DAE4161C999E260016CDE1 /* ZLTabBar.h */,
 				E2DAE4171C999E260016CDE1 /* ZLTabBar.m */,
+				E2F492841CDB43B800F4BCBD /* ZLIconView.h */,
+				E2F492851CDB43B800F4BCBD /* ZLIconView.m */,
+				E2F4929D1CDC898800F4BCBD /* ZLPlaceholderTextView.h */,
+				E2F4929E1CDC898800F4BCBD /* ZLPlaceholderTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -526,10 +545,10 @@
 				E26028071CC1065800532662 /* Foundation+Log.m */,
 				E2496C7D1C8F135C00B45EE1 /* UIBarButtonItem+Extension.h */,
 				E2496C7E1C8F135C00B45EE1 /* UIBarButtonItem+Extension.m */,
-				E247E2D01CB4F13100BB1CE9 /* UIWindow+Extension.m */,
 				E247E2CF1CB4F13100BB1CE9 /* UIWindow+Extension.h */,
-				E2496C801C8F135C00B45EE1 /* UIView+Extension.m */,
+				E247E2D01CB4F13100BB1CE9 /* UIWindow+Extension.m */,
 				E2D29F8F1CD8825E00A1C29D /* UIView+Extension.h */,
+				E2496C801C8F135C00B45EE1 /* UIView+Extension.m */,
 				E2268B351CD9026B00B46B22 /* NSDate+Extension.h */,
 				E2268B361CD9026B00B46B22 /* NSDate+Extension.m */,
 				E2C168861CD9FD1900AF3C16 /* NSString+Extension.h */,
@@ -571,6 +590,23 @@
 			children = (
 				E294DF8B1CA015B300018477 /* ZLNewFeatureViewController.h */,
 				E294DF8C1CA015B300018477 /* ZLNewFeatureViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E2F492891CDC3DBF00F4BCBD /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				E2F4928A1CDC3DBF00F4BCBD /* Controller */,
+			);
+			path = Compose;
+			sourceTree = "<group>";
+		};
+		E2F4928A1CDC3DBF00F4BCBD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E2F492941CDC3F2F00F4BCBD /* ZLComposeViewController.h */,
+				E2F492951CDC3F2F00F4BCBD /* ZLComposeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -773,8 +809,10 @@
 				E2496BC51C8F009600B45EE1 /* AppDelegate.m in Sources */,
 				E247E2CE1CB4AFE300BB1CE9 /* AccountTool.m in Sources */,
 				E2496BC41C8F009600B45EE1 /* ZLLNavigationViewController.m in Sources */,
+				E2F4929F1CDC898800F4BCBD /* ZLPlaceholderTextView.m in Sources */,
 				E2496BC31C8F009600B45EE1 /* MainTabBarController.m in Sources */,
 				E2496BC91C8F009600B45EE1 /* Test1ViewController.m in Sources */,
+				E2F492A21CDCB4A200F4BCBD /* MBProgressHUD+MJ.m in Sources */,
 				E2C168881CD9FD1900AF3C16 /* NSString+Extension.m in Sources */,
 				E2F492831CDB160D00F4BCBD /* ZLStatusPhotoView.m in Sources */,
 				E24FFAEF1CA3C94800949179 /* ZLOAuthViewController.m in Sources */,
@@ -787,7 +825,9 @@
 				E2D29F8E1CD87C9000A1C29D /* ZLStatusToolbar.m in Sources */,
 				E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */,
 				E2496C0C1C8F0C1C00B45EE1 /* ItemTool.m in Sources */,
+				E2F492861CDB43B800F4BCBD /* ZLIconView.m in Sources */,
 				E25877B41CCE18D7000704D9 /* ZLStatusFrame.m in Sources */,
+				E2F492961CDC3F2F00F4BCBD /* ZLComposeViewController.m in Sources */,
 				E25877B11CCE11FD000704D9 /* ZLStatusCell.m in Sources */,
 				E2496BC11C8F009600B45EE1 /* HomeViewController.m in Sources */,
 				E23311031C9933C300F1ACCD /* ZLSearchBar.m in Sources */,

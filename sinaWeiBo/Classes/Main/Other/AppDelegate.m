@@ -12,7 +12,7 @@
 #import "SDWebImageManager.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic, assign)UIBackgroundTaskIdentifier task;
 @end
 
 @implementation AppDelegate
@@ -59,13 +59,34 @@
      *  4.后台运行状态
      */
     
+    /*
+        1. 定义变量UIBackgroundTaskIdentifier task (定义的时候就已经赋值给task了，)
+        2. 执行右边的代码
+            [application beginBackgroundTaskWithExpirationHandler:^{
+                [application endBackgroundTask:task];
+            }];
+        3.将右边方法返回值赋值给task（因为是局部变量， 所以task还是之前赋值的那个值。）
+        解决方法，修饰变量 __block 或者 static(在这里不允许) 或者 变成全局变量，static需要直赋直接值，例如：static int = 10;
+
+     */
     // 向操作系统申请后台运行的资格，能维持多久，是不确定的
-       UIBackgroundTaskIdentifier task = [application beginBackgroundTaskWithExpirationHandler:^{
+            self.task = [application beginBackgroundTaskWithExpirationHandler:^{
         // 当申请的后台运行时间已经结束（过期），就会调用这个block
         
         // 赶紧结束任务
-           [application endBackgroundTask:task];
+           [application endBackgroundTask:self.task];
     }];
+    
+    /** __block 方法
+    // 向操作系统申请后台运行的资格，能维持多久，是不确定的
+   __block UIBackgroundTaskIdentifier task = [application beginBackgroundTaskWithExpirationHandler:^{
+        // 当申请的后台运行时间已经结束（过期），就会调用这个block
+        
+        // 赶紧结束任务
+        [application endBackgroundTask:task];
+    }];
+     */
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

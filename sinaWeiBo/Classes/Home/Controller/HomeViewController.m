@@ -142,7 +142,7 @@
 
     // 3.发送请求
     [session GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
-        //ZLLog(@"关注人微博请求成功－%@",responseObject);
+//        ZLLog(@"关注人微博请求成功－%@",responseObject);
         
         /** 这段代码简化成下面那一句代码。
          // 取得 “微博字典” 数组

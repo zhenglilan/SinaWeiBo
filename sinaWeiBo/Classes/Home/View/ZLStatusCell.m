@@ -9,11 +9,11 @@
 #import "ZLStatusCell.h"
 #import "ZLStatusFrame.h"
 #import "ZLStatus.h"
-#import "UIImageView+WebCache.h"
 #import "ZLUser.h"
 #import "ZLPhoto.h"
 #import "ZLStatusToolbar.h"
 #import "ZLStatusPhotosView.h"
+#import "ZLIconView.h"
 
 
 @interface ZLStatusCell()
@@ -21,7 +21,7 @@
 /** 原创微博的整个的view*/
 @property (nonatomic, weak)UIView *originView;
 /** 头像*/
-@property (nonatomic, weak)UIImageView *iconImageView;
+@property (nonatomic, weak)ZLIconView *iconImageView;
 /** VIP*/
 @property (nonatomic, weak)UIImageView *vipImageView;
 /** 配图*/
@@ -69,10 +69,11 @@
     
     /**------原创微博-----*/
     self.originView.frame = statusFrame.originViewFrame;
+    
     /** 头像*/
     self.iconImageView.frame = statusFrame.iconImageViewFrame;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:user.profile_image_url] placeholderImage:[UIImage imageNamed:@"avatar_default_small"]];
-    
+    self.iconImageView.user = user;
+      
     /** 会员图标*/
     if (user.isVIP) {
         self.vipImageView.hidden = NO;
@@ -184,7 +185,7 @@
     self.originView = originView;
     
     /** 头像图片*/
-    UIImageView *iconImageView = [[UIImageView alloc] init];
+    ZLIconView *iconImageView = [[ZLIconView alloc] init];
     [self.originView addSubview:iconImageView];
     self.iconImageView = iconImageView;
     

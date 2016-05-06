@@ -9,6 +9,19 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    ZLUserVertifiedTypeNone = -1, // 没有任何认证
+    
+    ZLUserVertifiedTypePersonal = 0, // 个人认证
+    
+    ZLUserVertifiedTypeOrgEnterprice = 2, // 企业官方：CSDN、EOE、搜狐新闻客户端
+    ZLUserVertifiedTypeOrgMedia = 3, // 媒体官方:程序员杂志、苹果汇
+    ZLUserVertifiedTypeOrgWebsite = 5, // 网站官方：猫扑
+    
+    ZLUserVertifiedTypeDaren = 220  // 微博达人
+    
+} ZLUserVertifiedType;
+
 @interface ZLUser : NSObject
 /**
  *  string	字符串型的用户UID
@@ -31,6 +44,9 @@
 
 /** 是否是会员*/
 @property (nonatomic, assign, getter=isVIP) BOOL VIP;
+
+/** 认证类型*/
+@property (nonatomic, assign)ZLUserVertifiedType verified_type;
 
 //+ (instancetype)userWithDictionary:(NSDictionary *)dic;
 @end
