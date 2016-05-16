@@ -9,7 +9,7 @@
 #import "ZLTitleListTableViewController.h"
 
 @interface ZLTitleListTableViewController ()
-
+@property (nonatomic, strong)NSMutableArray *dataSource;
 @end
 
 @implementation ZLTitleListTableViewController
@@ -17,7 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-   
+    self.dataSource = [NSMutableArray arrayWithArray:@[@"好友", @"密友", @"其他"]];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,7 +31,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 3;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -39,17 +41,26 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    if (indexPath.row == 0) {
-        cell.textLabel.text = @"好友";
-    }
-    if (indexPath.row == 1) {
-        cell.textLabel.text = @"蜜友";
-    }
-    if (indexPath.row == 2) {
-        cell.textLabel.text = @"其他";
-    }
+    cell.textLabel.text = self.dataSource[indexPath.row];
+    
+//    NSIndexPath *index = [tableView indexPathForCell:cell];
+//    
+//    [tableView beginUpdates];
+//    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    [tableView endUpdates];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView beginUpdates];
+    [self.dataSource insertObject:@"add" atIndex:indexPath.row+1];
+    [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [tableView endUpdates];
+    
+}
+
 
 
 @end

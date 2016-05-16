@@ -10,9 +10,13 @@
 #import "ZLPhoto.h"
 #import "ZLStatusPhotoView.h"
 
-#define kPhotoWH 76
+#define kPhotoWH 90
 #define kPhotoMargin 5
 #define kStatusPhotoMaxCol(count) ((count==4)?2:3)
+
+//@interface ZLStatusPhotosView()
+//@property (nonatomic, assign)CGFloat photoWH;
+//@end
 
 @implementation ZLStatusPhotosView
 
@@ -55,6 +59,7 @@
     [super layoutSubviews];
      // 设置图片的尺寸和位置
     NSInteger photosCount = self.photos.count;
+//    self.photoWH = (self.width - (kStatusPhotoMaxCol(photosCount) - 1) * kPhotoMargin) / kStatusPhotoMaxCol(photosCount);
     for (int i = 0; i < photosCount; i++) {
         ZLStatusPhotoView *photoView = self.subviews[i];
         
@@ -71,6 +76,8 @@
 
 + (CGSize)sizeWithCount:(NSInteger)count
 {
+//    CGFloat viewW = CGRectGetWidth([UIScreen mainScreen].bounds);
+//    CGFloat photoWH = (viewW - (kStatusPhotoMaxCol(count) - 1) * kPhotoMargin) / kStatusPhotoMaxCol(count);
     // 最大列数
     NSInteger maxCols = kStatusPhotoMaxCol(count);
     // 列数 （宽度）

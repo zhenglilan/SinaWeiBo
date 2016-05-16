@@ -25,6 +25,9 @@
         // 通知
         // 当UITextView的文字发生改变时，那么 UITextView自己就会发出一个UITextViewTextDidChangeNotification通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:self];
+        
+        // 一直可以竖直方向滑动
+//        self.alwaysBounceVertical = YES;
     }
     return self;
 }
