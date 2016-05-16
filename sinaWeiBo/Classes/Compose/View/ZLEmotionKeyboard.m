@@ -9,14 +9,69 @@
 #import "ZLEmotionKeyboard.h"
 #import "ZLEmotionTabbar.h"
 #import "ZLEmotionListView.h"
+#import "ZLEmotions.h"
+#import "MJExtension.h"
 
 @interface ZLEmotionKeyboard()<ZLEmotionTabbarDelegate>
+/** 用于容纳表情的listView*/
+@property (nonatomic, weak)UIView *contentView;
+
+/** 表情列表*/
+@property (nonatomic, strong)ZLEmotionListView *recentListView;
+@property (nonatomic, strong)ZLEmotionListView *defaultListView;
+@property (nonatomic, strong)ZLEmotionListView *emojiListView;
+@property (nonatomic, strong)ZLEmotionListView *lxhListView;
+
+/** 表情键盘下面的tabbar*/
 @property (nonatomic, weak)ZLEmotionTabbar *tabbar;
-@property (nonatomic, weak)ZLEmotionListView *listView;
 @end
 
 @implementation ZLEmotionKeyboard
 
+#pragma mark － 懒加载
+- (ZLEmotionListView *)recentListView
+{
+    if (!_recentListView) {
+        _recentListView = [[ZLEmotionListView alloc] init];
+    }
+    return _recentListView;
+}
+
+- (ZLEmotionListView *)defaultListView
+{
+    if (!_defaultListView) {
+        _defaultListView = [[ZLEmotionListView alloc] init];
+        _defaultListView.emotions = [self setupEmotionsWithPath:@"EmotionIcons/default/info.plist"];
+    }
+    return _defaultListView;
+}
+
+- (ZLEmotionListView *)emojiListView
+{
+    if (!_emojiListView) {
+        _emojiListView = [[ZLEmotionListView alloc] init];
+        _emojiListView.emotions = [self setupEmotionsWithPath:@"EmotionIcons/emoji/info.plist"];
+    }
+    return _emojiListView;
+}
+
+- (ZLEmotionListView *)lxhListView
+{
+    if (!_lxhListView) {
+        _lxhListView = [[ZLEmotionListView alloc] init];
+        _lxhListView.emotions = [self setupEmotionsWithPath:@"EmotionIcons/lxh/info.plist"];
+    }
+    return _lxhListView;
+}
+
+- (NSArray *)setupEmotionsWithPath:(NSString *)path
+{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:path ofType:nil];
+    NSArray *emotionArray = [ZLEmotions mj_objectArrayWithKeyValuesArray:[NSArray arrayWithContentsOfFile:filePath] context:nil];
+    return emotionArray;
+}
+
+#pragma mark - 系统方法
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -25,10 +80,10 @@
         [self addSubview:tabbar];
         self.tabbar = tabbar;
         
-        ZLEmotionListView *listView = [[ZLEmotionListView alloc] init];
-        [self addSubview:listView];
-        listView.backgroundColor = kRandomColor;
-        self.listView = listView;
+        UIView *contentView = [[UIView alloc] init];
+        [self addSubview:contentView];
+        self.contentView = contentView;
+       
     }
     return self;
 }
@@ -44,50 +99,52 @@
     self.tabbar.y = self.height - self.tabbar.height;
     self.tabbar.delegate = self;
     
-    // 2. listView
-    self.listView.x = self.listView.y  = 0;
-    self.listView.height = self.tabbar.y;
-    self.listView.width = self.width;
+    // 2. contentView
+    self.contentView.x = self.contentView.y = 0;
+    self.contentView.height = self.tabbar.y;
+    self.contentView.width = self.width;
+    
+    
+    // 3. 设置各个listView的frame
+//    UIView *child = [self.contentView.subviews lastObject];
+//    child.frame = self.contentView.bounds;
+//    ZLLog(@"layoutSubviews--%@",self.contentView.subviews);
 }
 
 #pragma mark - ZLEmotionTabbarDelegate
 - (void)emotionTabbar:(ZLEmotionTabbar *)tabbar buttonType:(EmotionButtonType)buttonType
 {
+    // 移除之前显示的控件
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    // 根据按钮类型，切换contentView上面的listView
     switch (buttonType) {
         case EmotionButtonTypeRecent:
-            ZLLog(@"最近");
+            [self.contentView addSubview:self.recentListView];
             break;
             
-        case EmotionButtonTypeDefault:{
-            NSArray *defaultEmotions = [self getEmotionsWithFilePath:@"EmotionIcons/emoji/info.plist"];
-            ZLLog(@"default--%@", defaultEmotions);
+        case EmotionButtonTypeDefault:
+            [self.contentView addSubview:self.defaultListView];
             break;
-        }
             
-        case EmotionButtonTypeEmoji: {
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"EmotionIcons/emoji/info.plist" ofType:nil];
-            NSArray *emojiEmotions = [NSArray arrayWithContentsOfFile:filePath];
-            ZLLog(@"emoji--%@", emojiEmotions);
+        case EmotionButtonTypeEmoji:
+            [self.contentView addSubview:self.emojiListView];
             break;
-        }
             
-        case EmotionButtonTypeLxh: {
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"EmotionIcons/lxh/info.plist" ofType:nil];
-            NSArray *lxhEmotions = [NSArray arrayWithContentsOfFile:filePath];
-            ZLLog(@"lxh--%@",lxhEmotions);
-           break;
-        }
+        case EmotionButtonTypeLxh:
+            [self.contentView addSubview:self.lxhListView];
+            break;
             
         default:
             break;
     }
+    UIView *child = [self.contentView.subviews lastObject];
+    child.frame = self.contentView.bounds;
+    // 重新计算子控件的frame（setNeedsLayout内部会在恰当的时刻，重新调用layoutSubviews，重新布局子控件） 
+//    [self layoutIfNeeded];
+//    [self setNeedsLayout];
 }
 
-- (NSArray *)getEmotionsWithFilePath:(NSString *)filePath
-{
-    NSString *path = [[NSBundle mainBundle] pathForResource:filePath ofType:nil];
-    NSArray *emotions = [NSArray arrayWithContentsOfFile:path];
-    return emotions;
-}
+
 
 @end

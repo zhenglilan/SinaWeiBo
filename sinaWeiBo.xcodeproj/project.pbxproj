@@ -20,6 +20,7 @@
 		E2396AD21CE5AC0A006C0B57 /* ZLEmotionListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2396AD11CE5AC0A006C0B57 /* ZLEmotionListView.m */; };
 		E2396AD51CE5C82D006C0B57 /* ZLEmotionTabbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E2396AD41CE5C82D006C0B57 /* ZLEmotionTabbarButton.m */; };
 		E2396AD71CE95962006C0B57 /* EmotionIcons in Resources */ = {isa = PBXBuildFile; fileRef = E2396AD61CE95962006C0B57 /* EmotionIcons */; };
+		E2396ADB1CE97A40006C0B57 /* ZLEmotions.m in Sources */ = {isa = PBXBuildFile; fileRef = E2396ADA1CE97A40006C0B57 /* ZLEmotions.m */; };
 		E247E2CA1CB3CB6C00BB1CE9 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = E247E2C91CB3CB6C00BB1CE9 /* Account.m */; };
 		E247E2CE1CB4AFE300BB1CE9 /* AccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E247E2CD1CB4AFE300BB1CE9 /* AccountTool.m */; };
 		E247E2D11CB4F13100BB1CE9 /* UIWindow+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E247E2D01CB4F13100BB1CE9 /* UIWindow+Extension.m */; };
@@ -107,6 +108,8 @@
 		E2396AD31CE5C82D006C0B57 /* ZLEmotionTabbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLEmotionTabbarButton.h; sourceTree = "<group>"; };
 		E2396AD41CE5C82D006C0B57 /* ZLEmotionTabbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotionTabbarButton.m; sourceTree = "<group>"; };
 		E2396AD61CE95962006C0B57 /* EmotionIcons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EmotionIcons; sourceTree = "<group>"; };
+		E2396AD91CE97A40006C0B57 /* ZLEmotions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLEmotions.h; sourceTree = "<group>"; };
+		E2396ADA1CE97A40006C0B57 /* ZLEmotions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotions.m; sourceTree = "<group>"; };
 		E247E2C81CB3CB6C00BB1CE9 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
 		E247E2C91CB3CB6C00BB1CE9 /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		E247E2CC1CB4AFE300BB1CE9 /* AccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountTool.h; sourceTree = "<group>"; };
@@ -247,6 +250,15 @@
 				E2396AD11CE5AC0A006C0B57 /* ZLEmotionListView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		E2396AD81CE97912006C0B57 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E2396AD91CE97A40006C0B57 /* ZLEmotions.h */,
+				E2396ADA1CE97A40006C0B57 /* ZLEmotions.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		E247E2C71CB3CB4F00BB1CE9 /* Model  */ = {
@@ -639,6 +651,7 @@
 			children = (
 				E2F4928A1CDC3DBF00F4BCBD /* Controller */,
 				E217C8FB1CDD97480069E31D /* View */,
+				E2396AD81CE97912006C0B57 /* Model */,
 			);
 			path = Compose;
 			sourceTree = "<group>";
@@ -869,6 +882,7 @@
 				E2D29F8E1CD87C9000A1C29D /* ZLStatusToolbar.m in Sources */,
 				E2396AD21CE5AC0A006C0B57 /* ZLEmotionListView.m in Sources */,
 				E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */,
+				E2396ADB1CE97A40006C0B57 /* ZLEmotions.m in Sources */,
 				E217C9011CDE30FA0069E31D /* ZLComposePhotosView.m in Sources */,
 				E2496C0C1C8F0C1C00B45EE1 /* ItemTool.m in Sources */,
 				E2F492861CDB43B800F4BCBD /* ZLIconView.m in Sources */,

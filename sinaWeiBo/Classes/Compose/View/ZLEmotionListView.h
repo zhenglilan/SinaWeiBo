@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ZLEmotionListView : UIView
-
+/** 表情，存放的是ZLEmotions模型*/
+@property (nonatomic, weak)NSArray *emotions;
 @end
+ 

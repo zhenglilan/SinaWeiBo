@@ -39,12 +39,8 @@
     [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
     btn.tag = buttonType;
     [self addSubview:btn];
-
-    // 设置默认选择
-    if (buttonType == EmotionButtonTypeDefault) {
-        [self btnClick:btn];
-    }
     
+
     // 设置背景图片
     NSString *image = nil;
     NSString *selectedImage = nil;
@@ -77,6 +73,15 @@
         btn.height = self.height;
         btn.width = btnWidth;
     }
+}
+
+- (void)setDelegate:(id<ZLEmotionTabbarDelegate>)delegate
+{
+    _delegate = delegate;
+    
+    // 设置默认选择
+    [self btnClick:(ZLEmotionTabbarButton *)[self viewWithTag:EmotionButtonTypeDefault]];
+    
 }
 
 /**
