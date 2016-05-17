@@ -11,6 +11,7 @@
 #import "UIWindow+Extension.h"
 #import "NSDate+Extension.h"
 #import "NSString+Extension.h"
+#import "NSString+Emoji.h"
 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch

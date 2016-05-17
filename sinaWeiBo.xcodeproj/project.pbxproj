@@ -41,6 +41,8 @@
 		E2496C811C8F135C00B45EE1 /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2496C7E1C8F135C00B45EE1 /* UIBarButtonItem+Extension.m */; };
 		E2496C821C8F135C00B45EE1 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2496C801C8F135C00B45EE1 /* UIView+Extension.m */; };
 		E24FFAEF1CA3C94800949179 /* ZLOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E24FFAEE1CA3C94800949179 /* ZLOAuthViewController.m */; };
+		E25173461CEABAF8005194BF /* ZLEmotionPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E25173451CEABAF8005194BF /* ZLEmotionPageView.m */; };
+		E25173491CEAC815005194BF /* NSString+Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = E25173481CEAC815005194BF /* NSString+Emoji.m */; };
 		E25877B11CCE11FD000704D9 /* ZLStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E25877B01CCE11FD000704D9 /* ZLStatusCell.m */; };
 		E25877B41CCE18D7000704D9 /* ZLStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E25877B31CCE18D7000704D9 /* ZLStatusFrame.m */; };
 		E26028081CC1065800532662 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E26028071CC1065800532662 /* Foundation+Log.m */; };
@@ -151,6 +153,10 @@
 		E2496C801C8F135C00B45EE1 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		E24FFAED1CA3C94800949179 /* ZLOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLOAuthViewController.h; sourceTree = "<group>"; };
 		E24FFAEE1CA3C94800949179 /* ZLOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLOAuthViewController.m; sourceTree = "<group>"; };
+		E25173441CEABAF8005194BF /* ZLEmotionPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLEmotionPageView.h; sourceTree = "<group>"; };
+		E25173451CEABAF8005194BF /* ZLEmotionPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotionPageView.m; sourceTree = "<group>"; };
+		E25173471CEAC815005194BF /* NSString+Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Emoji.h"; sourceTree = "<group>"; };
+		E25173481CEAC815005194BF /* NSString+Emoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Emoji.m"; sourceTree = "<group>"; };
 		E25877AF1CCE11FD000704D9 /* ZLStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusCell.h; sourceTree = "<group>"; };
 		E25877B01CCE11FD000704D9 /* ZLStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatusCell.m; sourceTree = "<group>"; };
 		E25877B21CCE18D7000704D9 /* ZLStatusFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusFrame.h; sourceTree = "<group>"; };
@@ -248,6 +254,8 @@
 				E2396AD41CE5C82D006C0B57 /* ZLEmotionTabbarButton.m */,
 				E2396AD01CE5AC0A006C0B57 /* ZLEmotionListView.h */,
 				E2396AD11CE5AC0A006C0B57 /* ZLEmotionListView.m */,
+				E25173441CEABAF8005194BF /* ZLEmotionPageView.h */,
+				E25173451CEABAF8005194BF /* ZLEmotionPageView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -594,6 +602,8 @@
 		E2496C7C1C8F135C00B45EE1 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E25173471CEAC815005194BF /* NSString+Emoji.h */,
+				E25173481CEAC815005194BF /* NSString+Emoji.m */,
 				E26028071CC1065800532662 /* Foundation+Log.m */,
 				E2496C7D1C8F135C00B45EE1 /* UIBarButtonItem+Extension.h */,
 				E2496C7E1C8F135C00B45EE1 /* UIBarButtonItem+Extension.m */,
@@ -867,6 +877,7 @@
 				E2496BC41C8F009600B45EE1 /* ZLLNavigationViewController.m in Sources */,
 				E2F4929F1CDC898800F4BCBD /* ZLPlaceholderTextView.m in Sources */,
 				E2496BC31C8F009600B45EE1 /* MainTabBarController.m in Sources */,
+				E25173491CEAC815005194BF /* NSString+Emoji.m in Sources */,
 				E2396AD51CE5C82D006C0B57 /* ZLEmotionTabbarButton.m in Sources */,
 				E2496BC91C8F009600B45EE1 /* Test1ViewController.m in Sources */,
 				E2F492A21CDCB4A200F4BCBD /* MBProgressHUD+MJ.m in Sources */,
@@ -884,6 +895,7 @@
 				E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */,
 				E2396ADB1CE97A40006C0B57 /* ZLEmotions.m in Sources */,
 				E217C9011CDE30FA0069E31D /* ZLComposePhotosView.m in Sources */,
+				E25173461CEABAF8005194BF /* ZLEmotionPageView.m in Sources */,
 				E2496C0C1C8F0C1C00B45EE1 /* ItemTool.m in Sources */,
 				E2F492861CDB43B800F4BCBD /* ZLIconView.m in Sources */,
 				E25877B41CCE18D7000704D9 /* ZLStatusFrame.m in Sources */,

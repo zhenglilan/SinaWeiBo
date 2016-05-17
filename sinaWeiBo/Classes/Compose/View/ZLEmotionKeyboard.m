@@ -14,7 +14,7 @@
 
 @interface ZLEmotionKeyboard()<ZLEmotionTabbarDelegate>
 /** 用于容纳表情的listView*/
-@property (nonatomic, weak)UIView *contentView;
+@property (nonatomic, strong)UIView *contentView;
 
 /** 表情列表*/
 @property (nonatomic, strong)ZLEmotionListView *recentListView;
@@ -64,6 +64,15 @@
     return _lxhListView;
 }
 
+- (UIView *)contentView
+{
+    if (!_contentView) {
+        _contentView = [[UIView alloc] init];
+        [self addSubview:_contentView];
+    }
+    return _contentView;
+}
+
 - (NSArray *)setupEmotionsWithPath:(NSString *)path
 {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:path ofType:nil];
@@ -78,11 +87,12 @@
     if (self) {
         ZLEmotionTabbar *tabbar = [[ZLEmotionTabbar alloc] init];
         [self addSubview:tabbar];
+        tabbar.delegate = self;
         self.tabbar = tabbar;
         
-        UIView *contentView = [[UIView alloc] init];
-        [self addSubview:contentView];
-        self.contentView = contentView;
+//        UIView *contentView = [[UIView alloc] init];
+//        [self addSubview:contentView];
+//        self.contentView = contentView;
        
     }
     return self;
@@ -97,7 +107,6 @@
     self.tabbar.x = 0;
     self.tabbar.width = self.width;
     self.tabbar.y = self.height - self.tabbar.height;
-    self.tabbar.delegate = self;
     
     // 2. contentView
     self.contentView.x = self.contentView.y = 0;
@@ -106,9 +115,8 @@
     
     
     // 3. 设置各个listView的frame
-//    UIView *child = [self.contentView.subviews lastObject];
-//    child.frame = self.contentView.bounds;
-//    ZLLog(@"layoutSubviews--%@",self.contentView.subviews);
+    UIView *child = [self.contentView.subviews lastObject];
+    child.frame = self.contentView.bounds;
 }
 
 #pragma mark - ZLEmotionTabbarDelegate
@@ -135,14 +143,15 @@
             [self.contentView addSubview:self.lxhListView];
             break;
             
+            
         default:
             break;
     }
-    UIView *child = [self.contentView.subviews lastObject];
-    child.frame = self.contentView.bounds;
-    // 重新计算子控件的frame（setNeedsLayout内部会在恰当的时刻，重新调用layoutSubviews，重新布局子控件） 
-//    [self layoutIfNeeded];
-//    [self setNeedsLayout];
+//    UIView *child = [self.contentView.subviews lastObject];
+//    child.frame = self.contentView.bounds;
+    // 重新计算子控件的frame（setNeedsLayout内部会在恰当的时刻，重新调用layoutSubviews，重新布局子控件）
+
+    [self setNeedsLayout];
 }
 
 

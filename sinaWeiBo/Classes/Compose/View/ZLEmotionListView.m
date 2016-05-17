@@ -7,7 +7,7 @@
 //
 
 #import "ZLEmotionListView.h"
-#define kEmotionsSize 20
+#import "ZLEmotionPageView.h"
 
 @interface ZLEmotionListView()<UIScrollViewDelegate>
 @property (nonatomic, weak)UIScrollView *scrollView;
@@ -24,7 +24,6 @@
         
         // 1.设置scrollView
         UIScrollView *scrollView = [[UIScrollView alloc] init];
-        scrollView.backgroundColor = [UIColor yellowColor];
         scrollView.pagingEnabled = YES;
         // 去除水平方向上的滚动条
         scrollView.showsHorizontalScrollIndicator = NO;
@@ -51,14 +50,27 @@
 - (void)setEmotions:(NSArray *)emotions
 {
     _emotions = emotions;
+    
+    NSInteger pageCount = (emotions.count + kEmotionPageSize - 1) / kEmotionPageSize;
     // 设置页数
-    self.pageControl.numberOfPages = (emotions.count + kEmotionsSize - 1) / kEmotionsSize;
+    self.pageControl.numberOfPages = pageCount;
     
     // 创建用来显示每一页表情的控件
-    // scrollView里的子控件里不全是自己手动添加的，还有水平方向上的滚动条和垂直方向上的滚动条
-    for (int i = 0; i < self.pageControl.numberOfPages; i++) {
-        UIView *pageView = [[UIView alloc] init];
-        pageView.backgroundColor = kRandomColor;
+    for (int i = 0; i < pageCount; i++) {
+        ZLEmotionPageView *pageView = [[ZLEmotionPageView alloc] init];
+        // 每一页显示的表情的范围
+        NSRange range;
+        range.location = i * kEmotionPageSize;
+        // 剩下的表情个数
+        NSInteger leftCount = emotions.count - range.location;
+        if (leftCount >= kEmotionPageSize) {// 这一页足够20
+            range.length = kEmotionPageSize;
+        } else {// 这一页不足20
+            range.length = leftCount;
+        }
+        
+        // 每一页显示的表情
+        pageView.emotions = [emotions subarrayWithRange:range];
         [self.scrollView addSubview:pageView];
     }
 }
@@ -80,9 +92,11 @@
     self.scrollView.width = self.width;
     
     // 3.设置scrollView内部每一页的尺寸
+    // scrollView里的子控件里不全是自己手动添加的，还有水平方向上的滚动条和垂直方向上的滚动条
     NSInteger count = self.scrollView.subviews.count;
     for (int i = 0; i < count; i++) {
-        UIView *pageView = self.scrollView.subviews[i];
+//        if ([self.scrollView.subviews[i] isKindOfClass:[UIImageView class]]) continue;
+        ZLEmotionPageView *pageView = self.scrollView.subviews[i];
         pageView.width = self.scrollView.width;
         pageView.height = self.scrollView.height;
         pageView.y = 0;

@@ -39,7 +39,12 @@
     if (!_emotionKeyboard) {
         _emotionKeyboard = [[ZLEmotionKeyboard alloc] init];
         _emotionKeyboard.height = 216;
+        // 键盘的宽度
         _emotionKeyboard.width = self.view.width;
+        // 如果键盘宽度不为零，系统会强制让键盘的宽度等于屏幕的宽度
+//        if (self.emotionKeyboard.width > 0) {
+//            self.emotionKeyboard.width = [UIScreen mainScreen].bounds.size.width;
+//        }
     }
     return _emotionKeyboard;
 }
