@@ -43,6 +43,8 @@
 		E24FFAEF1CA3C94800949179 /* ZLOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E24FFAEE1CA3C94800949179 /* ZLOAuthViewController.m */; };
 		E25173461CEABAF8005194BF /* ZLEmotionPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E25173451CEABAF8005194BF /* ZLEmotionPageView.m */; };
 		E25173491CEAC815005194BF /* NSString+Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = E25173481CEAC815005194BF /* NSString+Emoji.m */; };
+		E251734C1CEAF4A7005194BF /* ZLEmotionPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E251734B1CEAF4A7005194BF /* ZLEmotionPopView.m */; };
+		E251734E1CEAF4C0005194BF /* ZLEmotionPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E251734D1CEAF4C0005194BF /* ZLEmotionPopView.xib */; };
 		E25877B11CCE11FD000704D9 /* ZLStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E25877B01CCE11FD000704D9 /* ZLStatusCell.m */; };
 		E25877B41CCE18D7000704D9 /* ZLStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E25877B31CCE18D7000704D9 /* ZLStatusFrame.m */; };
 		E26028081CC1065800532662 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E26028071CC1065800532662 /* Foundation+Log.m */; };
@@ -54,6 +56,7 @@
 		E29D77131CD065090042E5C0 /* ZLPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E29D77121CD065090042E5C0 /* ZLPhoto.m */; };
 		E29FD78B1CB53CC700F40633 /* ZLTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E29FD78A1CB53CC700F40633 /* ZLTitleButton.m */; };
 		E2C168881CD9FD1900AF3C16 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C168871CD9FD1900AF3C16 /* NSString+Extension.m */; };
+		E2D139551CEB0A4A007A7AC6 /* ZLEmotionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D139541CEB0A4A007A7AC6 /* ZLEmotionButton.m */; };
 		E2D29F8E1CD87C9000A1C29D /* ZLStatusToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D29F8D1CD87C9000A1C29D /* ZLStatusToolbar.m */; };
 		E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAE4171C999E260016CDE1 /* ZLTabBar.m */; };
 		E2F492801CDAEB4F00F4BCBD /* ZLStatusPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F4927F1CDAEB4F00F4BCBD /* ZLStatusPhotosView.m */; };
@@ -157,6 +160,9 @@
 		E25173451CEABAF8005194BF /* ZLEmotionPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotionPageView.m; sourceTree = "<group>"; };
 		E25173471CEAC815005194BF /* NSString+Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Emoji.h"; sourceTree = "<group>"; };
 		E25173481CEAC815005194BF /* NSString+Emoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Emoji.m"; sourceTree = "<group>"; };
+		E251734A1CEAF4A7005194BF /* ZLEmotionPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLEmotionPopView.h; sourceTree = "<group>"; };
+		E251734B1CEAF4A7005194BF /* ZLEmotionPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotionPopView.m; sourceTree = "<group>"; };
+		E251734D1CEAF4C0005194BF /* ZLEmotionPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZLEmotionPopView.xib; sourceTree = "<group>"; };
 		E25877AF1CCE11FD000704D9 /* ZLStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusCell.h; sourceTree = "<group>"; };
 		E25877B01CCE11FD000704D9 /* ZLStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatusCell.m; sourceTree = "<group>"; };
 		E25877B21CCE18D7000704D9 /* ZLStatusFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusFrame.h; sourceTree = "<group>"; };
@@ -177,6 +183,8 @@
 		E29FD78A1CB53CC700F40633 /* ZLTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLTitleButton.m; sourceTree = "<group>"; };
 		E2C168861CD9FD1900AF3C16 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		E2C168871CD9FD1900AF3C16 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		E2D139531CEB0A4A007A7AC6 /* ZLEmotionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLEmotionButton.h; sourceTree = "<group>"; };
+		E2D139541CEB0A4A007A7AC6 /* ZLEmotionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotionButton.m; sourceTree = "<group>"; };
 		E2D29F8C1CD87C9000A1C29D /* ZLStatusToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusToolbar.h; sourceTree = "<group>"; };
 		E2D29F8D1CD87C9000A1C29D /* ZLStatusToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatusToolbar.m; sourceTree = "<group>"; };
 		E2D29F8F1CD8825E00A1C29D /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -256,6 +264,11 @@
 				E2396AD11CE5AC0A006C0B57 /* ZLEmotionListView.m */,
 				E25173441CEABAF8005194BF /* ZLEmotionPageView.h */,
 				E25173451CEABAF8005194BF /* ZLEmotionPageView.m */,
+				E251734A1CEAF4A7005194BF /* ZLEmotionPopView.h */,
+				E251734B1CEAF4A7005194BF /* ZLEmotionPopView.m */,
+				E251734D1CEAF4C0005194BF /* ZLEmotionPopView.xib */,
+				E2D139531CEB0A4A007A7AC6 /* ZLEmotionButton.h */,
+				E2D139541CEB0A4A007A7AC6 /* ZLEmotionButton.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -782,6 +795,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E251734E1CEAF4C0005194BF /* ZLEmotionPopView.xib in Resources */,
 				E2396AD71CE95962006C0B57 /* EmotionIcons in Resources */,
 				E2496BCA1C8F009600B45EE1 /* Test1ViewController.xib in Resources */,
 				E26028131CC4746C00532662 /* ZLLoadMoreFooter.xib in Resources */,
@@ -892,6 +906,7 @@
 				E260280B1CC24BE000532662 /* ZLUser.m in Sources */,
 				E2D29F8E1CD87C9000A1C29D /* ZLStatusToolbar.m in Sources */,
 				E2396AD21CE5AC0A006C0B57 /* ZLEmotionListView.m in Sources */,
+				E2D139551CEB0A4A007A7AC6 /* ZLEmotionButton.m in Sources */,
 				E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */,
 				E2396ADB1CE97A40006C0B57 /* ZLEmotions.m in Sources */,
 				E217C9011CDE30FA0069E31D /* ZLComposePhotosView.m in Sources */,
@@ -907,6 +922,7 @@
 				E23311031C9933C300F1ACCD /* ZLSearchBar.m in Sources */,
 				E26028081CC1065800532662 /* Foundation+Log.m in Sources */,
 				E26028111CC4744F00532662 /* ZLLoadMoreFooter.m in Sources */,
+				E251734C1CEAF4A7005194BF /* ZLEmotionPopView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

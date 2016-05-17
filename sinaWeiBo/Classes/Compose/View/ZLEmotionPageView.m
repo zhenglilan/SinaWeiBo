@@ -8,25 +8,38 @@
 
 #import "ZLEmotionPageView.h"
 #import "ZLEmotions.h"
+#import "ZLEmotionPopView.h"
+#import "ZLEmotionButton.h"
+
+@interface ZLEmotionPageView()
+@property (nonatomic, strong)ZLEmotionPopView *popView;
+@end
 
 @implementation ZLEmotionPageView
+
+- (ZLEmotionPopView *)popView
+{
+    if (!_popView) {
+        _popView = [ZLEmotionPopView popView];
+    }
+    return _popView;
+}
+
 - (void)setEmotions:(NSArray *)emotions
 {
     _emotions = emotions;
     
     NSInteger count = emotions.count;
     for (int i = 0; i < count; i++) {
-        UIButton *btn = [[UIButton alloc] init];
-        // 取表情
-        ZLEmotions *emotion = emotions[i];
-        if (emotion.png) {
-            [btn setImage:[UIImage imageNamed:emotion.png] forState:UIControlStateNormal];
-        } else if(emotion.code) {
-            // 设置emoji
-            [btn setTitle:[emotion.code emoji] forState:UIControlStateNormal];
-            btn.titleLabel.font = [UIFont systemFontOfSize:32];
-            }
+        
+        ZLEmotionButton *btn = [[ZLEmotionButton alloc] init];
         [self addSubview:btn];
+        
+        // 设置表情数据
+        [btn setEmotion: emotions[i]];
+        
+        // 监听按钮点击
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
@@ -47,5 +60,25 @@
         btn.x = padding + (i%kEmotionMaxCols) * btnW;
         btn.y = padding + (i/kEmotionMaxCols) * btnH;
     }
+}
+
+/**
+ *  监听按钮点击事件
+ *
+ *  @param button 被点击的按钮
+ */
+- (void)btnClick:(ZLEmotionButton *)button
+{
+    // 给popView传递数据
+    self.popView.emotion = button.emotion;
+    
+    // 取到最上面的Window
+    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
+    [window addSubview:self.popView];
+    
+    // 计算出被点击的按钮在window中的坐标
+    CGRect btnFrame = [button convertRect:button.bounds toView:nil];
+    self.popView.y = CGRectGetMidY(btnFrame) - self.popView.height;
+    self.popView.centerX = CGRectGetMidX(btnFrame);
 }
 @end
