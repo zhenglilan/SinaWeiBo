@@ -80,5 +80,15 @@
     CGRect btnFrame = [button convertRect:button.bounds toView:nil];
     self.popView.y = CGRectGetMidY(btnFrame) - self.popView.height;
     self.popView.centerX = CGRectGetMidX(btnFrame);
+    
+    // 几秒之后，popView消失
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.popView removeFromSuperview];
+    });
+    
+    // 发送通知
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    userInfo[kSelectedEmotion] = button.emotion;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kEmotionDidSelectNotification object:nil userInfo:userInfo];
 }
 @end

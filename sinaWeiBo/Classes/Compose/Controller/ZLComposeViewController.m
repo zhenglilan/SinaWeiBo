@@ -8,17 +8,18 @@
 
 #import "ZLComposeViewController.h"
 #import "AccountTool.h"
-#import "ZLPlaceholderTextView.h"
+#import "ZLEmotionTextView.h"
 #import "AFNetworking.h"
 #import "MBProgressHUD+MJ.h"
 #import "ZLComposeToolbar.h"
 #import "ZLComposePhotosView.h"
 #import "ZLEmotionKeyboard.h"
+#import "ZLEmotions.h"
 
 
 @interface ZLComposeViewController ()<UITextViewDelegate, ZLComposeToolbarDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 /** 自定义输入框*/
-@property (nonatomic, weak)ZLPlaceholderTextView *textView;
+@property (nonatomic, weak)ZLEmotionTextView *textView;
 /** 工具条*/
 @property (nonatomic, weak)ZLComposeToolbar *toolbar;
 /** 相册（存放拍照或者相册中选择的图片*/
@@ -140,7 +141,7 @@
 - (void)setupTextView {
     
     // 在这个控制器中，textView的contentInset.top默认为64
-    ZLPlaceholderTextView *textView = [[ZLPlaceholderTextView alloc] init];
+    ZLEmotionTextView *textView = [[ZLEmotionTextView alloc] init];
     textView.alwaysBounceVertical = YES;
     textView.frame = self.view.bounds;
     [self.view addSubview:textView];
@@ -157,6 +158,8 @@
     // 监听键盘显示／隐藏的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
+    // 监听点击表情按钮的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidSelected:) name:kEmotionDidSelectNotification object:nil];
 }
 
 /**
@@ -181,6 +184,22 @@
 }
 
 #pragma mark - 监听方法
+/**
+ *  表情按钮被点击了
+ *
+ */
+- (void)emotionDidSelected:(NSNotification *)notification
+{
+    ZLEmotions *emotion = notification.userInfo[kSelectedEmotion];
+    
+    if (emotion.code) { // emoji表情
+        
+        [self.textView insertText:emotion.code.emoji];
+    } else if(emotion.png) {// 其他表情
+        
+        [self.textView insertEmotion:emotion];
+    }
+}
 
 /**
  *  键盘的frame发生改变时调用 （显示和隐藏）

@@ -57,6 +57,7 @@
 		E29FD78B1CB53CC700F40633 /* ZLTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E29FD78A1CB53CC700F40633 /* ZLTitleButton.m */; };
 		E2C168881CD9FD1900AF3C16 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C168871CD9FD1900AF3C16 /* NSString+Extension.m */; };
 		E2D139551CEB0A4A007A7AC6 /* ZLEmotionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D139541CEB0A4A007A7AC6 /* ZLEmotionButton.m */; };
+		E2D139581CEC3A03007A7AC6 /* ZLEmotionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D139571CEC3A03007A7AC6 /* ZLEmotionTextView.m */; };
 		E2D29F8E1CD87C9000A1C29D /* ZLStatusToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D29F8D1CD87C9000A1C29D /* ZLStatusToolbar.m */; };
 		E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAE4171C999E260016CDE1 /* ZLTabBar.m */; };
 		E2F492801CDAEB4F00F4BCBD /* ZLStatusPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F4927F1CDAEB4F00F4BCBD /* ZLStatusPhotosView.m */; };
@@ -185,6 +186,8 @@
 		E2C168871CD9FD1900AF3C16 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		E2D139531CEB0A4A007A7AC6 /* ZLEmotionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLEmotionButton.h; sourceTree = "<group>"; };
 		E2D139541CEB0A4A007A7AC6 /* ZLEmotionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotionButton.m; sourceTree = "<group>"; };
+		E2D139561CEC3A03007A7AC6 /* ZLEmotionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLEmotionTextView.h; sourceTree = "<group>"; };
+		E2D139571CEC3A03007A7AC6 /* ZLEmotionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotionTextView.m; sourceTree = "<group>"; };
 		E2D29F8C1CD87C9000A1C29D /* ZLStatusToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusToolbar.h; sourceTree = "<group>"; };
 		E2D29F8D1CD87C9000A1C29D /* ZLStatusToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatusToolbar.m; sourceTree = "<group>"; };
 		E2D29F8F1CD8825E00A1C29D /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -269,6 +272,8 @@
 				E251734D1CEAF4C0005194BF /* ZLEmotionPopView.xib */,
 				E2D139531CEB0A4A007A7AC6 /* ZLEmotionButton.h */,
 				E2D139541CEB0A4A007A7AC6 /* ZLEmotionButton.m */,
+				E2D139561CEC3A03007A7AC6 /* ZLEmotionTextView.h */,
+				E2D139571CEC3A03007A7AC6 /* ZLEmotionTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -900,6 +905,7 @@
 				E24FFAEF1CA3C94800949179 /* ZLOAuthViewController.m in Sources */,
 				E2496BC71C8F009600B45EE1 /* MessageCenterViewController.m in Sources */,
 				E247E2CA1CB3CB6C00BB1CE9 /* Account.m in Sources */,
+				E2D139581CEC3A03007A7AC6 /* ZLEmotionTextView.m in Sources */,
 				E2496BC61C8F009600B45EE1 /* main.m in Sources */,
 				E2268B371CD9026B00B46B22 /* NSDate+Extension.m in Sources */,
 				E23311091C9952F200F1ACCD /* ZLTitleListTableViewController.m in Sources */,

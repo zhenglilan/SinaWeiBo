@@ -44,6 +44,9 @@
 - (void)setup
 {
     self.titleLabel.font = [UIFont systemFontOfSize:32];
+    // 按钮高亮点时候，不要去调整图片
+    self.adjustsImageWhenHighlighted = NO;
+//    self.adjustsImageWhenDisabled
 }
 
 -(void)setEmotion:(ZLEmotions *)emotion

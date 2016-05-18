@@ -58,7 +58,6 @@
     // 创建用来显示每一页表情的控件
     for (int i = 0; i < pageCount; i++) {
         ZLEmotionPageView *pageView = [[ZLEmotionPageView alloc] init];
-        pageView.backgroundColor = kRandomColor;
         // 每一页显示的表情的范围
         NSRange range;
         range.location = i * kEmotionPageSize;

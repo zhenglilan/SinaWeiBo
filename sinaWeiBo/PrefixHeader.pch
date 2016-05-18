@@ -34,6 +34,8 @@
 // account的沙盒路径定义成宏
 #define AccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.archive"]
 
-
+// 通知
+#define kEmotionDidSelectNotification @"EmotionDidSelectNotification"
+#define kSelectedEmotion @"SelectedEmotion"
 
 #endif /* PrefixHeader_pch */
