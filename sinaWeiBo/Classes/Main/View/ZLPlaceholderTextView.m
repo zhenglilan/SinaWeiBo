@@ -86,6 +86,12 @@
     [self setNeedsDisplay];
 }
 
+- (void)setAttributedText:(NSAttributedString *)attributedText
+{
+    [super setAttributedText:attributedText];
+    [self setNeedsDisplay];
+}
+
 
 
 @end

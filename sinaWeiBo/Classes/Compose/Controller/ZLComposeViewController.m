@@ -27,6 +27,8 @@
 #warning 一定要用Strong
 /** 自定义表情键盘*/
 @property (nonatomic, strong)ZLEmotionKeyboard *emotionKeyboard;
+/** 开始切换键盘*/
+@property (nonatomic, assign)BOOL swichingKeyboard;
 @end
 
 @implementation ZLComposeViewController
@@ -68,6 +70,7 @@
     
     // 添加相册
     [self setupPhotosView];
+    
 }
 
 - (void)dealloc {
@@ -144,6 +147,7 @@
     ZLEmotionTextView *textView = [[ZLEmotionTextView alloc] init];
     textView.alwaysBounceVertical = YES;
     textView.frame = self.view.bounds;
+    textView.font = [UIFont systemFontOfSize:16];
     [self.view addSubview:textView];
     textView.placeholder = @"分享新鲜事...";
     textView.delegate = self;
@@ -160,6 +164,9 @@
     
     // 监听点击表情按钮的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidSelected:) name:kEmotionDidSelectNotification object:nil];
+    
+    // 监听删除按钮的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidDelete) name:kEmotionDidDeleteNotification object:nil];
 }
 
 /**
@@ -185,6 +192,14 @@
 
 #pragma mark - 监听方法
 /**
+ *  监听删除按钮的通知
+ */
+- (void)emotionDidDelete
+{
+    [self.textView deleteBackward];
+}
+
+/**
  *  表情按钮被点击了
  *
  */
@@ -192,13 +207,7 @@
 {
     ZLEmotions *emotion = notification.userInfo[kSelectedEmotion];
     
-    if (emotion.code) { // emoji表情
-        
-        [self.textView insertText:emotion.code.emoji];
-    } else if(emotion.png) {// 其他表情
-        
-        [self.textView insertEmotion:emotion];
-    }
+    [self.textView insertEmotion:emotion];
 }
 
 /**
@@ -217,6 +226,9 @@
      UIKeyboardAnimationCurveUserInfoKey = 7,
      }}
      */
+    
+    if (self.swichingKeyboard) return;
+    
     NSDictionary *userInfo = notification.userInfo;
     double duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -277,7 +289,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     Account *account = [AccountTool account];
     parameters[@"access_token"] = account.access_token;
-    parameters[@"status"] = self.textView.text;
+    parameters[@"status"] = self.textView.fullText;
     
     UIImage *img = [self.photosView.photos firstObject];
     NSData *data = UIImageJPEGRepresentation(img, 0.1);
@@ -320,8 +332,8 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     Account *account = [AccountTool account];
     parameters[@"access_token"] = account.access_token;
-    parameters[@"status"] = self.textView.text;
-    
+    parameters[@"status"] = self.textView.fullText;
+        
     // 3. 发送请求
     [manager POST:@"https://api.weibo.com/2/statuses/update.json" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -378,8 +390,12 @@
         self.toolbar.showKeyboardButton = NO;
     }
     
+    self.swichingKeyboard = YES;
+    
     // 退出键盘
     [self.textView endEditing:YES];
+    
+    self.swichingKeyboard = NO;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 弹出键盘

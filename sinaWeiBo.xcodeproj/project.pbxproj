@@ -10,6 +10,7 @@
 		E217C8FE1CDD97760069E31D /* ZLComposeToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E217C8FD1CDD97760069E31D /* ZLComposeToolbar.m */; };
 		E217C9011CDE30FA0069E31D /* ZLComposePhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E217C9001CDE30FA0069E31D /* ZLComposePhotosView.m */; };
 		E2268B371CD9026B00B46B22 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2268B361CD9026B00B46B22 /* NSDate+Extension.m */; };
+		E228C1851CEDD8580011158D /* ZLEmotionTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = E228C1841CEDD8580011158D /* ZLEmotionTextAttachment.m */; };
 		E23310F91C93F22B00F1ACCD /* Text2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E23310F71C93F22B00F1ACCD /* Text2ViewController.m */; };
 		E23310FA1C93F22B00F1ACCD /* Text2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23310F81C93F22B00F1ACCD /* Text2ViewController.xib */; };
 		E23311031C9933C300F1ACCD /* ZLSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E23311021C9933C300F1ACCD /* ZLSearchBar.m */; };
@@ -58,6 +59,7 @@
 		E2C168881CD9FD1900AF3C16 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C168871CD9FD1900AF3C16 /* NSString+Extension.m */; };
 		E2D139551CEB0A4A007A7AC6 /* ZLEmotionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D139541CEB0A4A007A7AC6 /* ZLEmotionButton.m */; };
 		E2D139581CEC3A03007A7AC6 /* ZLEmotionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D139571CEC3A03007A7AC6 /* ZLEmotionTextView.m */; };
+		E2D1395B1CEC4BDE007A7AC6 /* UITextView+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D1395A1CEC4BDE007A7AC6 /* UITextView+Extention.m */; };
 		E2D29F8E1CD87C9000A1C29D /* ZLStatusToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D29F8D1CD87C9000A1C29D /* ZLStatusToolbar.m */; };
 		E2DAE4181C999E260016CDE1 /* ZLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAE4171C999E260016CDE1 /* ZLTabBar.m */; };
 		E2F492801CDAEB4F00F4BCBD /* ZLStatusPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F4927F1CDAEB4F00F4BCBD /* ZLStatusPhotosView.m */; };
@@ -96,6 +98,8 @@
 		E217C9001CDE30FA0069E31D /* ZLComposePhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLComposePhotosView.m; sourceTree = "<group>"; };
 		E2268B351CD9026B00B46B22 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		E2268B361CD9026B00B46B22 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		E228C1831CEDD8580011158D /* ZLEmotionTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLEmotionTextAttachment.h; sourceTree = "<group>"; };
+		E228C1841CEDD8580011158D /* ZLEmotionTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotionTextAttachment.m; sourceTree = "<group>"; };
 		E23310F61C93F22B00F1ACCD /* Text2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Text2ViewController.h; sourceTree = "<group>"; };
 		E23310F71C93F22B00F1ACCD /* Text2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Text2ViewController.m; sourceTree = "<group>"; };
 		E23310F81C93F22B00F1ACCD /* Text2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Text2ViewController.xib; sourceTree = "<group>"; };
@@ -188,6 +192,8 @@
 		E2D139541CEB0A4A007A7AC6 /* ZLEmotionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotionButton.m; sourceTree = "<group>"; };
 		E2D139561CEC3A03007A7AC6 /* ZLEmotionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLEmotionTextView.h; sourceTree = "<group>"; };
 		E2D139571CEC3A03007A7AC6 /* ZLEmotionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmotionTextView.m; sourceTree = "<group>"; };
+		E2D139591CEC4BDE007A7AC6 /* UITextView+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Extention.h"; sourceTree = "<group>"; };
+		E2D1395A1CEC4BDE007A7AC6 /* UITextView+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Extention.m"; sourceTree = "<group>"; };
 		E2D29F8C1CD87C9000A1C29D /* ZLStatusToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLStatusToolbar.h; sourceTree = "<group>"; };
 		E2D29F8D1CD87C9000A1C29D /* ZLStatusToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLStatusToolbar.m; sourceTree = "<group>"; };
 		E2D29F8F1CD8825E00A1C29D /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -281,6 +287,8 @@
 		E2396AD81CE97912006C0B57 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E228C1831CEDD8580011158D /* ZLEmotionTextAttachment.h */,
+				E228C1841CEDD8580011158D /* ZLEmotionTextAttachment.m */,
 				E2396AD91CE97A40006C0B57 /* ZLEmotions.h */,
 				E2396ADA1CE97A40006C0B57 /* ZLEmotions.m */,
 			);
@@ -634,6 +642,8 @@
 				E2C168861CD9FD1900AF3C16 /* NSString+Extension.h */,
 				E2C168871CD9FD1900AF3C16 /* NSString+Extension.m */,
 				E2496BAB1C8F009600B45EE1 /* main.m */,
+				E2D139591CEC4BDE007A7AC6 /* UITextView+Extention.h */,
+				E2D1395A1CEC4BDE007A7AC6 /* UITextView+Extention.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -904,12 +914,14 @@
 				E2F492831CDB160D00F4BCBD /* ZLStatusPhotoView.m in Sources */,
 				E24FFAEF1CA3C94800949179 /* ZLOAuthViewController.m in Sources */,
 				E2496BC71C8F009600B45EE1 /* MessageCenterViewController.m in Sources */,
+				E228C1851CEDD8580011158D /* ZLEmotionTextAttachment.m in Sources */,
 				E247E2CA1CB3CB6C00BB1CE9 /* Account.m in Sources */,
 				E2D139581CEC3A03007A7AC6 /* ZLEmotionTextView.m in Sources */,
 				E2496BC61C8F009600B45EE1 /* main.m in Sources */,
 				E2268B371CD9026B00B46B22 /* NSDate+Extension.m in Sources */,
 				E23311091C9952F200F1ACCD /* ZLTitleListTableViewController.m in Sources */,
 				E260280B1CC24BE000532662 /* ZLUser.m in Sources */,
+				E2D1395B1CEC4BDE007A7AC6 /* UITextView+Extention.m in Sources */,
 				E2D29F8E1CD87C9000A1C29D /* ZLStatusToolbar.m in Sources */,
 				E2396AD21CE5AC0A006C0B57 /* ZLEmotionListView.m in Sources */,
 				E2D139551CEB0A4A007A7AC6 /* ZLEmotionButton.m in Sources */,

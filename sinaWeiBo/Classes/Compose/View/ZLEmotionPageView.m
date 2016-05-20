@@ -12,10 +12,28 @@
 #import "ZLEmotionButton.h"
 
 @interface ZLEmotionPageView()
+/** 放大镜*/
 @property (nonatomic, strong)ZLEmotionPopView *popView;
+/** 删除按钮*/
+@property (nonatomic, weak)UIButton *deleteBtn;
 @end
 
 @implementation ZLEmotionPageView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        UIButton *deleteBtn = [[UIButton alloc] init];
+        [deleteBtn setImage:[UIImage imageNamed:@"compose_emotion_delete"] forState:UIControlStateNormal];
+        [deleteBtn setImage:[UIImage imageNamed:@"compose_emotion_delete_highlighted"] forState:UIControlStateHighlighted];
+        [self addSubview:deleteBtn];
+        [deleteBtn addTarget:self action:@selector(deleteBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        self.deleteBtn = deleteBtn;
+    }
+    return self;
+}
+
 
 - (ZLEmotionPopView *)popView
 {
@@ -54,12 +72,18 @@
     CGFloat btnW = (self.width - 2 * padding) / kEmotionMaxCols;
     CGFloat btnH = (self.height - padding) / kEmotionMaxRows;
     for (int i = 0; i < count; i++) {
-        UIButton *btn = self.subviews[i];
+        UIButton *btn = self.subviews[i+1];
         btn.width = btnW;
         btn.height = btnH;
         btn.x = padding + (i%kEmotionMaxCols) * btnW;
         btn.y = padding + (i/kEmotionMaxCols) * btnH;
     }
+    
+    // 设置删除按钮的位置
+    self.deleteBtn.width = btnW;
+    self.deleteBtn.height = btnH;
+    self.deleteBtn.x = self.width - padding - btnW;
+    self.deleteBtn.y = self.height - btnH;
 }
 
 /**
@@ -90,5 +114,13 @@
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     userInfo[kSelectedEmotion] = button.emotion;
     [[NSNotificationCenter defaultCenter] postNotificationName:kEmotionDidSelectNotification object:nil userInfo:userInfo];
+}
+
+/**
+ *  删除按钮被点击
+ */
+- (void)deleteBtnClick
+{
+    [[NSNotificationCenter defaultCenter]postNotificationName:kEmotionDidDeleteNotification object:nil];
 }
 @end

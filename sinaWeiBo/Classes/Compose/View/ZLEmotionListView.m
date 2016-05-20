@@ -39,7 +39,7 @@
 //        pageControl.pageIndicatorTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"compose_keyboard_dot_normal"]];
         [pageControl setValue:[UIImage imageNamed:@"compose_keyboard_dot_normal"] forKeyPath:@"pageImage"];
         [pageControl setValue:[UIImage imageNamed:@"compose_keyboard_dot_selected"] forKeyPath:@"currentPageImage"];
-//        pageControl.userInteractionEnabled = NO;
+        pageControl.userInteractionEnabled = NO;
         [self addSubview:pageControl];
         self.pageControl = pageControl;
     }

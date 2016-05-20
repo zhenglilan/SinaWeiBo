@@ -12,6 +12,7 @@
 #import "NSDate+Extension.h"
 #import "NSString+Extension.h"
 #import "NSString+Emoji.h"
+#import "UITextView+Extention.h"
 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
@@ -35,7 +36,10 @@
 #define AccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.archive"]
 
 // 通知
+// 表情按钮被点击的通知
 #define kEmotionDidSelectNotification @"EmotionDidSelectNotification"
 #define kSelectedEmotion @"SelectedEmotion"
+// 删除按钮被点击的通知
+#define kEmotionDidDeleteNotification @"kEmotionDidDeleteNotification"
 
 #endif /* PrefixHeader_pch */

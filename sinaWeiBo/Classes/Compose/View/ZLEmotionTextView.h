@@ -12,4 +12,6 @@
 @interface ZLEmotionTextView : ZLPlaceholderTextView
 
 - (void)insertEmotion:(ZLEmotions *)emotion;
+
+- (NSAttributedString *)fullText;
 @end
